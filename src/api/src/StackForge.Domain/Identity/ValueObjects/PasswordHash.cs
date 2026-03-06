@@ -14,7 +14,7 @@ namespace StackForge.Domain.Identity.ValueObjects
 
         private PasswordHash() { }
 
-        public PasswordHash Create(string value)
+        public static PasswordHash Create(string value)
         {
             var normalizedValue = Normalize(value);
             Validate(normalizedValue);

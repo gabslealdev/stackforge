@@ -7,7 +7,7 @@ namespace StackForge.Domain.Identity.ValueObjects
 {
     public sealed record Email : ValueObject
     {
-        private const int MinLength = 5;
+        private const int MinLength = 8; 
         private const int MaxLength = 254;
 
         public string Value { get;}
