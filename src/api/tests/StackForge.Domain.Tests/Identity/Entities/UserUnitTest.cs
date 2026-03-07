@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Shouldly;
-using StackForge.Domain.Identity.Enums;
 using StackForge.Domain.Tests.Identity.Builders;
 
 namespace StackForge.Domain.Tests.Identity.Entities
@@ -14,10 +13,9 @@ namespace StackForge.Domain.Tests.Identity.Entities
             var faker = new Faker();
             var email = faker.Internet.Email();
             var passwordHash = faker.Random.Hash();
-            var role = faker.PickRandom<Role>();
 
             // act
-            Action action = () => new UserDataBuilder().WithEmail(email).WithPasswordHash(passwordHash).WithRole(role).Build();
+            Action action = () => new UserDataBuilder().WithEmail(email).WithPasswordHash(passwordHash);
 
             // assert
             action.ShouldNotThrow();
