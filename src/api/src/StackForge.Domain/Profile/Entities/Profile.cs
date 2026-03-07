@@ -1,6 +1,8 @@
-﻿using StackForge.Domain.Profile.Errors;
+﻿using StackForge.Domain.Identity.Entities;
+using StackForge.Domain.Profile.Errors;
 using StackForge.Domain.Profile.ValueObjects;
 using StackForge.Domain.Shared.Entities;
+using StackForge.Domain.Shared.Errors;
 using StackForge.Domain.Shared.Exceptions;
 
 namespace StackForge.Domain.Profile.Entities
@@ -15,7 +17,7 @@ namespace StackForge.Domain.Profile.Entities
 
         protected Profile(Name name, Guid userId, DateOnly birthDate)
         {
-            ValidateBirthDate(birthDate);
+            Validate(birthDate, userId);
 
             Name = name;
             UserId = userId;
@@ -23,18 +25,26 @@ namespace StackForge.Domain.Profile.Entities
             CreatedAt = DateTimeOffset.UtcNow;
         }
 
-        public Profile() { }
+        protected Profile() { }
 
-        protected void UpdatePersonalInfo(Name name, DateOnly birthDate)
+        protected void UpdatePersonalInfo(string firstName, string lastName, DateOnly birthDate)
         {
-            ValidateBirthDate(birthDate);
-            Name = name;
+            DomainExceptionValidation.When(!isValidBirthDate(birthDate), ProfileError.BirthDateInFuture);
+
+            Name = Name.Create(firstName, lastName);
             BirthDate = birthDate;
         }
 
-        private static void ValidateBirthDate(DateOnly birthDate)
+        protected static void Validate(DateOnly birthDate, Guid userId)
         {
-            DomainExceptionValidation.When(birthDate > DateOnly.FromDateTime(DateTime.UtcNow), ProfileError.BirthDateInFuture);
+            DomainExceptionValidation.When(!isValidBirthDate(birthDate), ProfileError.BirthDateInFuture);
+            DomainExceptionValidation.When(userId == Guid.Empty, ProfileError.UserIdRequired);
+        }
+
+        private static bool isValidBirthDate(DateOnly birthDate)
+        {
+           var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            return birthDate <= today;
         }
     }
 }

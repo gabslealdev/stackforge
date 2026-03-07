@@ -15,7 +15,7 @@ namespace StackForge.Domain.Tests.Identity.Entities
             var passwordHash = faker.Random.Hash();
 
             // act
-            Action action = () => new UserDataBuilder().WithEmail(email).WithPasswordHash(passwordHash);
+            Action action = () => new UserBuilder().WithEmail(email).WithPasswordHash(passwordHash);
 
             // assert
             action.ShouldNotThrow();

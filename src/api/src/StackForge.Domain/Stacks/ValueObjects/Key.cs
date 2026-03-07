@@ -6,7 +6,7 @@ namespace StackForge.Domain.Stacks.ValueObjects
 {
     public sealed record Key : ValueObject
     {
-        private const int MaxLength = 20; //React Native
+        private const int MaxLength = 20;
 
         public string Value { get; private set; }
 
@@ -30,10 +30,10 @@ namespace StackForge.Domain.Stacks.ValueObjects
         private static void Validate(string value)
         {
             DomainExceptionValidation.When(string.IsNullOrWhiteSpace(value), StackErrors.StackKeyRequired);
-            DomainExceptionValidation.When(value.Length > 20, StackErrors.StackKeyTooLong);
+            DomainExceptionValidation.When(value.Length > MaxLength, StackErrors.StackKeyTooLong);
         }
 
         private static string Normalize(string value)
-            => value?.Trim() ?? string.Empty;
+            => value?.Trim().ToLower() ?? string.Empty;
     }
 }

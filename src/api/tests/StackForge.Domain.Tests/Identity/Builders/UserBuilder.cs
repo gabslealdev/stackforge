@@ -3,19 +3,19 @@ using StackForge.Domain.Identity.Entities;
 
 namespace StackForge.Domain.Tests.Identity.Builders
 {
-    public sealed class UserDataBuilder
+    public sealed class UserBuilder
     {
         private readonly Faker _faker = new();
         private string? _email;
         private string? _passwordHash;
 
-        public UserDataBuilder WithEmail(string email)
+        public UserBuilder WithEmail(string email)
         {
             _email = email;
             return this;
         }
 
-        public UserDataBuilder WithPasswordHash(string passwordHash)
+        public UserBuilder WithPasswordHash(string passwordHash)
         {
             _passwordHash = passwordHash;
             return this;

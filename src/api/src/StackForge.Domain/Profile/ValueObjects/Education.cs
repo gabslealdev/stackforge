@@ -32,7 +32,6 @@ namespace StackForge.Domain.Profile.ValueObjects
             ValidateConclusionDate(status, conclusionDate);
 
             return new Education(normalizedCourseName, normalizedInstitution, status, conclusionDate);
-
         }
 
         private static string Normalize(string value) 
@@ -50,14 +49,13 @@ namespace StackForge.Domain.Profile.ValueObjects
 
         private static void ValidateConclusionDate(EducationStatus status, DateOnly conclusionDate)
         {
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+
             if (status == EducationStatus.Completed)
             {
-                DomainExceptionValidation.When(conclusionDate > DateOnly.FromDateTime(DateTime.UtcNow), EducationError.EducationConclusionDateInvalid);
+                DomainExceptionValidation.When(conclusionDate > today, EducationError.EducationConclusionDateInvalid);
             }
-                
         }
-
-
 
     }
 }

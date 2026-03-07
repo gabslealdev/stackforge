@@ -37,7 +37,7 @@ namespace StackForge.Domain.Stacks.Entities
         private static void Validate(string name)
         {
             DomainExceptionValidation.When(string.IsNullOrWhiteSpace(name), StackErrors.StackNameRequired);
-            DomainExceptionValidation.When(name.Length > 20, StackErrors.StackNameTooLong);
+            DomainExceptionValidation.When(name.Length > MaxLength, StackErrors.StackNameTooLong);
         }
     }
 }
