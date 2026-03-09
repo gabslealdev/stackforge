@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StackForge.Domain\StackForge.Domain.csproj" />
     <ProjectReference Include="..\StackForge.Application\StackForge.Application.csproj" />
   </ItemGroup>
