@@ -24,15 +24,9 @@ namespace StackForge.Domain.Profile.Entities
         }
         private MentorProfile() { }
 
-        public static MentorProfile Create(string firstName, string lastName, Guid userId, DateOnly birthDate, string? textBio, AvailabityStatus availabity, string courseName, string institution, EducationStatus status, DateOnly conclusionDate)
+        public static MentorProfile Create(Name name, Guid userId, DateOnly birthDate, Bio? bio, AvailabityStatus availabity, Education education)
         {
             Validate(birthDate, userId);
-
-            var name = Name.Create(firstName, lastName);
-            var education = Education.Create(courseName, institution, status, conclusionDate);
-            Bio? bio = string.IsNullOrWhiteSpace(textBio) ? null : Bio.Create(textBio);
-
-
             return new MentorProfile(name, userId, birthDate, education, bio, availabity);
         }
 
@@ -53,14 +47,14 @@ namespace StackForge.Domain.Profile.Entities
             _stacks.Remove(stack!);
         }
 
-        public void UpdateEducation(string courseName, string institution, EducationStatus status, DateOnly conclusionDate)
+        public void UpdateEducation(Education education)
         {
-            Education = Education.Create(courseName, institution, status, conclusionDate);
+            Education = education;
         }
 
-        public void UpdateBio(string? inputBio)
+        public void UpdateBio(Bio? bio)
         {
-            Bio = string.IsNullOrWhiteSpace(inputBio) ? null : Bio.Create(inputBio);
+            Bio = bio;
         }
 
         public void ChangeAvailability()
@@ -71,16 +65,16 @@ namespace StackForge.Domain.Profile.Entities
                 Availability = AvailabityStatus.Unavailable;
         }
 
-        public void UpdateMentorProfile(string firstName, string lastName, DateOnly birthDate)
+        public void UpdateMentorProfile(Name name, DateOnly birthDate)
         {
-            UpdatePersonalInfo(firstName, lastName, birthDate);
+            UpdatePersonalInfo(name, birthDate);
         }
 
-        public void UpdateProfile(string firstName, string lastName, DateOnly birthDate, string courseName, string institution, EducationStatus status, DateOnly conclusionDate, string? textBio, AvailabityStatus availability)
+        public void UpdateProfile(Name name, DateOnly birthDate, Education education, Bio? bio, AvailabityStatus availability)
         {
-            UpdatePersonalInfo(firstName, lastName, birthDate);
-            UpdateEducation(courseName, institution, status, conclusionDate);
-            UpdateBio(textBio);
+            UpdatePersonalInfo(name, birthDate);
+            UpdateEducation(education);
+            UpdateBio(bio);
         }
 
     }

@@ -23,12 +23,12 @@ namespace StackForge.Domain.Stacks.Entities
 
         private Stack() { }
 
-        public static Stack Create(string name, string key)
+        public static Stack Create(string name, Key key)
         {
             Validate(name);
             var normalizedName = Normalize(name);
 
-            return new Stack(normalizedName, Key.Create(key));
+            return new Stack(normalizedName, key);
         }
 
         private static string Normalize(string value)

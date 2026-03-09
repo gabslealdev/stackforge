@@ -17,8 +17,8 @@ namespace StackForge.Domain.Identity.Entities
 
         private User() { }
 
-        public static User Create(string email, string passwordHash) 
-            => new User(Email.Create(email), PasswordHash.Create(passwordHash));
+        public static User Create(Email email, PasswordHash passwordHash) 
+            => new User(email, passwordHash);
 
 
     }

@@ -27,11 +27,11 @@ namespace StackForge.Domain.Profile.Entities
 
         protected Profile() { }
 
-        protected void UpdatePersonalInfo(string firstName, string lastName, DateOnly birthDate)
+        protected void UpdatePersonalInfo(Name name, DateOnly birthDate)
         {
             DomainExceptionValidation.When(!isValidBirthDate(birthDate), ProfileError.BirthDateInFuture);
 
-            Name = Name.Create(firstName, lastName);
+            Name = name;
             BirthDate = birthDate;
         }
 

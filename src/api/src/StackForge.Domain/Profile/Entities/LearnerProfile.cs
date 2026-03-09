@@ -8,17 +8,15 @@ namespace StackForge.Domain.Profile.Entities
         {
         }
         private LearnerProfile() { }
-        public static LearnerProfile Create(string firstName, string lastName, Guid userId, DateOnly birthDate)
+        public static LearnerProfile Create(Name name, Guid userId, DateOnly birthDate)
         {
             Validate(birthDate, userId);
-
-            var name = Name.Create(firstName, lastName);
             return new LearnerProfile(name, userId, birthDate);
         }
 
-        public void UpdateLearnerProfile(string firstName, string lastName, DateOnly birthDate)
+        public void UpdateLearnerProfile(Name name, DateOnly birthDate)
         {
-            UpdatePersonalInfo(firstName, lastName, birthDate);
+            UpdatePersonalInfo(name, birthDate);
         }
     }
 }
