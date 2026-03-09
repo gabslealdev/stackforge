@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using StackForge.Domain.Stacks.Entities;
+using StackForge.Domain.Stacks.ValueObjects;
 
 namespace StackForge.Domain.Tests.Stacks.Builders
 {
@@ -25,7 +26,7 @@ namespace StackForge.Domain.Tests.Stacks.Builders
         {
             var name = _name ?? _faker.Lorem.Word();
             var key = _key ?? _faker.Lorem.Word();
-            return Stack.Create(name, key);
+            return Stack.Create(name, Key.Create(key));
         }
     }
 }

@@ -37,7 +37,8 @@ namespace StackForge.Domain.Tests.Profile.Builders
             var lastName = _lastName ?? _faker.Name.LastName();
             var userId = _userId ?? Guid.NewGuid();
             var birthDate = _birthDate ?? DateOnly.FromDateTime(_faker.Date.Past(30, DateTime.UtcNow.AddYears(-18)));
-            return LearnerProfile.Create(firstName, lastName, userId, birthDate);
+
+            return LearnerProfile.Create(Name.Create(firstName, lastName), userId, birthDate);
 
         }
 

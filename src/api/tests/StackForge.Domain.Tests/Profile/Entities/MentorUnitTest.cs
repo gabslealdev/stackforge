@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Shouldly;
 using StackForge.Domain.Profile.Enum;
+using StackForge.Domain.Profile.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Tests.Profile.Builders;
 using StackForge.Domain.Tests.Stacks.Builders;
@@ -149,7 +150,7 @@ namespace StackForge.Domain.Tests.Profile.Entities
             var conclusionDate = DateOnly.FromDateTime(_faker.Date.Past(5));
 
             // act 
-            mentor.UpdateEducation(courseName, institution, status, conclusionDate);
+            mentor.UpdateEducation(Education.Create(courseName, institution, status, conclusionDate));
 
             // assert
             mentor.Education.CourseName.ShouldBe(courseName);
@@ -166,10 +167,10 @@ namespace StackForge.Domain.Tests.Profile.Entities
             var firstName = _faker.Name.FirstName();
             var lastName = _faker.Name.LastName();
             var birthDate = DateOnly.FromDateTime(_faker.Date.Past(30, DateTime.UtcNow.AddYears(-32)));
-            mentor.UpdateMentorProfile(firstName, lastName, birthDate);
+            mentor.UpdateMentorProfile(Name.Create(firstName, lastName), birthDate);
 
             // act 
-            mentor.UpdateMentorProfile(firstName, lastName, birthDate);
+            mentor.UpdateMentorProfile(Name.Create(firstName, lastName), birthDate);
 
             // assert
             mentor.Name.FirstName.ShouldBe(firstName);
@@ -197,13 +198,14 @@ namespace StackForge.Domain.Tests.Profile.Entities
         {
             // arrange
             var mentor = new MentorProfileBuilder().WithBio(null!).Build();
-            var bio = _faker.Lorem.Paragraph();
+            var bio = Bio.Create(_faker.Lorem.Paragraph());
+
 
             // act 
             mentor.UpdateBio(bio);
 
             // assert
-            mentor.Bio?.Value.ShouldBe(bio);
+            mentor.Bio?.Value.ShouldBe(bio.Value);
         }
 
     }

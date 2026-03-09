@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using StackForge.Domain.Identity.Entities;
+using StackForge.Domain.Identity.ValueObjects;
 
 namespace StackForge.Domain.Tests.Identity.Builders
 {
@@ -26,7 +27,9 @@ namespace StackForge.Domain.Tests.Identity.Builders
             var email = _email ?? _faker.Internet.Email();
             var passwordHash = _passwordHash ?? _faker.Internet.Password();
 
-            return User.Create(email, passwordHash);
+            
+
+            return User.Create(Email.Create(email), PasswordHash.Create(passwordHash));
 
         }
     }

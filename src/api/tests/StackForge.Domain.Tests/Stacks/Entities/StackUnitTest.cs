@@ -2,6 +2,7 @@
 using Shouldly;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Stacks.Entities;
+using StackForge.Domain.Stacks.ValueObjects;
 using StackForge.Domain.Tests.Stacks.Builders;
 
 namespace StackForge.Domain.Tests.Stacks.Entities
@@ -17,8 +18,9 @@ namespace StackForge.Domain.Tests.Stacks.Entities
             var name = _faker.Random.Word();
             var key = _faker.Random.String2(15);
 
+
             // act 
-            Action action = () => Stack.Create(name, key);
+            Action action = () => Stack.Create(name, Key.Create(key));
 
             // assert
             action.ShouldNotThrow();
@@ -32,7 +34,7 @@ namespace StackForge.Domain.Tests.Stacks.Entities
             var key = _faker.Random.String2(15);
 
             // act 
-            Action action = () => Stack.Create(name, key);
+            Action action = () => Stack.Create(name, Key.Create(key));
 
             // assert
             var exception = action.ShouldThrow<DomainExceptionValidation>();
@@ -48,7 +50,7 @@ namespace StackForge.Domain.Tests.Stacks.Entities
             var key = _faker.Random.String2(15);
 
             // act 
-            Action action = () => Stack.Create(name, key);
+            Action action = () => Stack.Create(name, Key.Create(key));
 
             // assert
             var exception = action.ShouldThrow<DomainExceptionValidation>();

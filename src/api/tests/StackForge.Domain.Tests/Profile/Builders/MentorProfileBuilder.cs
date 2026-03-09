@@ -70,7 +70,7 @@ namespace StackForge.Domain.Tests.Profile.Builders
             var educationStatus = _educationStatus ?? EducationStatus.Completed;
             var conclusionDate = _conclusionDate ?? DateOnly.FromDateTime(_faker.Date.Past(5));
 
-            return MentorProfile.Create(firstName, lastName, userId, birthDate, textBio, availability, courseName, institution, educationStatus, conclusionDate);
+            return MentorProfile.Create(Name.Create(firstName, lastName), userId, birthDate, Bio.Create(textBio), availability, Education.Create(courseName, institution, educationStatus, conclusionDate));
         }
 
     }
