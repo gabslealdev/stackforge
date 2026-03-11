@@ -2,10 +2,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StackForge.Application\StackForge.Application.csproj" />
-    <ProjectReference Include="..\StacKForge.Infrastructure\StackForge.Infrastructure.csproj" />
+    <ProjectReference Include="..\StackForge.Infrastructure\StackForge.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
   </ItemGroup>
 
