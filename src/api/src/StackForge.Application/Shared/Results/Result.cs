@@ -5,15 +5,11 @@
         protected Result(bool isSuccess, Error error)
         {
             if (isSuccess && error != Error.None)
-            {
                 throw new InvalidOperationException("A successful result cannot have an error.");
-            }
 
             if (!isSuccess && error == Error.None)
-            {
                 throw new InvalidOperationException("A failed result must have an error.");
-            }
-
+      
             IsSuccess = isSuccess;
             Error = error;
         }
@@ -22,11 +18,11 @@
         public bool IsFailure => !IsSuccess;
         public Error Error { get; private set; }
 
-        public static Result Success() => new(true, Error.None);
+        public static Result Success()
+            => new(true, Error.None);
 
-        public static Result Failure(Error error) => new(false, error);
-
-
+        public static Result Failure(Error error)
+            => new(false, error);
 
     }
 
@@ -40,7 +36,8 @@
         private Result(Error error) : base(false, error)
             => _value = default;
 
-        public T Value => IsSuccess ? _value! : throw new InvalidOperationException("Cannot access the value of a failed result.");
+        public T Value 
+            => IsSuccess ? _value! : throw new InvalidOperationException("Cannot access the value of a failed result.");
 
         public static Result<T> Success(T value) 
             => new(value);
