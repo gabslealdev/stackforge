@@ -1,4 +1,4 @@
-﻿using StackForge.Domain.Profile.Enum;
+﻿using StackForge.Domain.Profile.Enums;
 using StackForge.Domain.Profile.Errors;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Shared.ValueObjects;

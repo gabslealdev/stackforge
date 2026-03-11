@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using Shouldly;
-using StackForge.Domain.Profile.Enum;
+using StackForge.Domain.Profile.Enums;
 using StackForge.Domain.Profile.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Tests.Profile.Builders;

@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using StackForge.Domain.Profile.Entities;
-using StackForge.Domain.Profile.Enum;
+using StackForge.Domain.Profile.Enums;
 using StackForge.Domain.Profile.ValueObjects;
 
 namespace StackForge.Domain.Tests.Profile.Builders

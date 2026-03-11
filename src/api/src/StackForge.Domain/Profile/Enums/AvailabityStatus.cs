@@ -1,4 +1,4 @@
-﻿namespace StackForge.Domain.Profile.Enum
+﻿namespace StackForge.Domain.Profile.Enums
 {
     public enum AvailabityStatus
     {
