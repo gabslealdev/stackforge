@@ -7,5 +7,6 @@ namespace StackForge.Application.Identity.Interfaces.Repository
     {
         Task<bool> ExistsByEmailAsync(Email email);
         Task AddAsync(User user);
+        Task<User?> GetByIdAsync(Guid id);
     }
 }

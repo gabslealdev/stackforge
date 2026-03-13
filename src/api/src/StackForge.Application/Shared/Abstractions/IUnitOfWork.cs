@@ -1,4 +1,4 @@
-﻿namespace StackForge.Application.Identity.Abstractions
+﻿namespace StackForge.Application.Shared.Abstractions
 {
     public interface IUnitOfWork
     {

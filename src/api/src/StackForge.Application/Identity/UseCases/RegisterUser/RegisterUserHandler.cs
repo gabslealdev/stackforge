@@ -1,6 +1,7 @@
-﻿using StackForge.Application.Identity.Abstractions;
-using StackForge.Application.Identity.Interfaces.Repository;
+﻿using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
+using StackForge.Application.Identity.UseCases.Errors;
+using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 using StackForge.Domain.Identity.Entities;
 using StackForge.Domain.Identity.ValueObjects;
@@ -30,7 +31,7 @@ namespace StackForge.Application.Identity.UseCases.RegisterUser
             var emailExist = await _userRepository.ExistsByEmailAsync(email);
 
             if (emailExist)
-                return Result<RegisterUserResponse>.Failure(IdentityApplicationErrors.EmailAlreadyInUse);
+                return Result<RegisterUserResponse>.Failure(UserApplicationErrors.EmailAlreadyInUse);
 
             var hashedPassword = _passwordHasher.Hash(command.Password);
             var passwordHash = PasswordHash.Create(hashedPassword);
