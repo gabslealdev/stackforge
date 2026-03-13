@@ -14,20 +14,21 @@ namespace StackForge.Domain.Profile.Entities
 
         public Education Education { get; private set; }
         public Bio? Bio { get; private set; }
-        public AvailabityStatus Availability { get; private set; }
+        public AvailabilityStatus Availability { get; private set; }
 
-        private MentorProfile(Name name, Guid userId, DateOnly birthDate, Education education, Bio? bio, AvailabityStatus availabity) : base(name, userId, birthDate)
+
+        private MentorProfile(Name name, Guid userId, DateOnly birthDate, Education education, Bio? bio) : base(name, userId, birthDate)
         {
             Education = education;
             Bio = bio;
-            Availability = availabity;
+            Availability = AvailabilityStatus.Unavailable;
         }
         private MentorProfile() { }
 
-        public static MentorProfile Create(Name name, Guid userId, DateOnly birthDate, Bio? bio, AvailabityStatus availabity, Education education)
+        public static MentorProfile Create(Name name, Guid userId, DateOnly birthDate, Education education,  Bio? bio)
         {
             Validate(birthDate, userId);
-            return new MentorProfile(name, userId, birthDate, education, bio, availabity);
+            return new MentorProfile(name, userId, birthDate, education, bio);
         }
 
         public void AddStack(Stack stack)
@@ -57,25 +58,29 @@ namespace StackForge.Domain.Profile.Entities
             Bio = bio;
         }
 
-        public void ChangeAvailability()
-        {
-           if (Availability == AvailabityStatus.Unavailable)
-                Availability = AvailabityStatus.Available;
-            else
-                Availability = AvailabityStatus.Unavailable;
-        }
-
         public void UpdateMentorProfile(Name name, DateOnly birthDate)
         {
             UpdatePersonalInfo(name, birthDate);
         }
 
-        public void UpdateProfile(Name name, DateOnly birthDate, Education education, Bio? bio, AvailabityStatus availability)
+        public void UpdateProfile(Name name, DateOnly birthDate, Education education, Bio? bio, AvailabilityStatus availability)
         {
             UpdatePersonalInfo(name, birthDate);
             UpdateEducation(education);
             UpdateBio(bio);
         }
 
+        public void MarkAsAvailable()
+        {
+            var existsStack = _stacks.Count > 0;
+            DomainExceptionValidation.When(!existsStack, MentorError.StackRequired);
+
+            Availability = AvailabilityStatus.Available;
+        }
+
+        public void MarkAsUnavailable()
+        {
+            Availability = AvailabilityStatus.Unavailable;
+        }
     }
 }

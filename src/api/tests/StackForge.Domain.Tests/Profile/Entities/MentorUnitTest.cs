@@ -179,19 +179,52 @@ namespace StackForge.Domain.Tests.Profile.Entities
         }
 
         [Fact]
-        public void ChangeAvailability_ShouldUpdate_WhenAvailabilityIsValid()
+        public void MarkAsAvailable_ShouldUpdate_WhenAvailabilityIsValid()
         {
             // arrange
-            var availability = AvailabityStatus.Unavailable;
-            var mentor = new MentorProfileBuilder().WithAvailability(availability).Build();
+            var mentor = new MentorProfileBuilder().Build();
+            var stack = new StackBuilder().Build();
+            mentor.AddStack(stack);
 
             // act 
-            mentor.ChangeAvailability();
+            mentor.MarkAsAvailable(); ;
 
             // assert
-            mentor.Availability.ShouldBe(AvailabityStatus.Available);
+            mentor.Availability.ShouldBe(AvailabilityStatus.Available);
 
-        }   
+        }
+
+        [Fact]
+        public void MarkAsAvailable_ShouldThrow_WhenMentorHasNoStack()
+        {
+            // arrange
+            var mentor = new MentorProfileBuilder().Build();
+
+            // act 
+            Action action = () => mentor.MarkAsAvailable();
+
+            // assert
+            var exception = action.ShouldThrow<DomainExceptionValidation>();
+            exception.Error.Code.ShouldBe("Mentor.Stack.Required");
+            exception.Error.Message.ShouldBe("At least one stack is required.");
+        }
+
+        [Fact]
+        public void MarkAsUnavailable_ShouldUpdate_WhenAvailabilityIsValid()
+        {
+            // arrange
+            var mentor = new MentorProfileBuilder().Build();
+            var stack = new StackBuilder().Build();
+            mentor.AddStack(stack);
+            mentor.MarkAsAvailable();
+
+            // act 
+            mentor.MarkAsUnavailable(); ;
+
+            // assert
+            mentor.Availability.ShouldBe(AvailabilityStatus.Unavailable);
+
+        }
 
         [Fact]
         public void UpdateBio_ShouldUpdate_WhenBioIsValid()

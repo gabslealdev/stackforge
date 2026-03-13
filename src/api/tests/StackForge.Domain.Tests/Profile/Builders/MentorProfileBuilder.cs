@@ -14,7 +14,7 @@ namespace StackForge.Domain.Tests.Profile.Builders
         private Guid? _userId;
         private DateOnly? _birthDate;
         private string? _textBio;
-        private AvailabityStatus? _availability;
+        private AvailabilityStatus? _availability;
         private Education? _education;
         private string? _courseName;
         private string? _institution;
@@ -37,20 +37,13 @@ namespace StackForge.Domain.Tests.Profile.Builders
         {
             _birthDate = birthDate;
             return this;
-        }
+        } 
 
         public MentorProfileBuilder WithBio(string textBio)
         {
             _textBio = textBio;
             return this;
         }
-
-        public MentorProfileBuilder WithAvailability(AvailabityStatus availability)
-        {
-            _availability = availability;
-            return this;
-        }
-
         public MentorProfileBuilder WithEducation(Education education)
         {
             _education = education;
@@ -64,7 +57,7 @@ namespace StackForge.Domain.Tests.Profile.Builders
             var userId = _userId ?? Guid.NewGuid();
             var birthDate = _birthDate ?? DateOnly.FromDateTime(_faker.Date.Past(30, DateTime.UtcNow.AddYears(-18)));
             var textBio = _textBio ?? _faker.Lorem.Paragraph();
-            var availability = _availability ?? AvailabityStatus.Available;
+            var availability = _availability ?? AvailabilityStatus.Available;
             var courseName = _courseName ?? _faker.Name.JobTitle();
             var institution = _institution ?? _faker.Random.Word();
             var educationStatus = _educationStatus ?? EducationStatus.Completed;
