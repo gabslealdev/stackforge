@@ -2,12 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StackForge.Application.Identity.Abstractions;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
 using StackForge.Application.Identity.UseCases.RegisterUser;
+using StackForge.Application.Profile.Interfaces;
+using StackForge.Application.Shared.Abstractions;
 using StackForge.Infrastructure.Data.Context;
-using StackForge.Infrastructure.Data.Repositories;
+using StackForge.Infrastructure.Data.Repositories.Identity;
+using StackForge.Infrastructure.Data.Repositories.Profile;
 using StackForge.Infrastructure.Data.UnitOfWork;
 using StackForge.Infrastructure.Security;
 
@@ -28,8 +30,9 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<RegisterUserHandler>();
+            services.AddScoped<ILearnerProfileRepository, LearnerProfileRepository>();
+            services.AddScoped<IMentorProfileRepository, MentorProfileRepository>();
             
-
             return services;
         }
     }

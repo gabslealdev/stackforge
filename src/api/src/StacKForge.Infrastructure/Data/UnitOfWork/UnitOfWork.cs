@@ -1,4 +1,4 @@
-﻿using StackForge.Application.Identity.Abstractions;
+﻿using StackForge.Application.Shared.Abstractions;
 using StackForge.Infrastructure.Data.Context;
 
 namespace StackForge.Infrastructure.Data.UnitOfWork
