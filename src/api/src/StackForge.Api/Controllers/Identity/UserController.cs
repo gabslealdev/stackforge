@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using StackForge.Application.Identity.UseCases.RegisterUser;
 using StackForge.Application.Shared.Results;
 
-namespace StackForge.Api.Controllers
+namespace StackForge.Api.Controllers.Identity
 {
+    [ApiController]
+    [Route("api/identity/user")]
     public sealed class UserController : ControllerBase
     {
         private readonly RegisterUserHandler _handler;
@@ -16,7 +18,7 @@ namespace StackForge.Api.Controllers
             _validator = validator;
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [ProducesResponseType(typeof(RegisterUserResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
@@ -27,8 +29,8 @@ namespace StackForge.Api.Controllers
             {
                 var errors = validationResult.Errors.Select(error => new
                 {
-                    error.PropertyName,
-                    error.ErrorMessage
+                    property = error.PropertyName,
+                    message = error.ErrorMessage
                 });
 
                 return BadRequest(errors);
@@ -44,7 +46,7 @@ namespace StackForge.Api.Controllers
                 });
             }
 
-            return StatusCode(StatusCodes.Status201Created, result.Value);
+            return Created(string.Empty, result.Value);
         }
     }
 }
