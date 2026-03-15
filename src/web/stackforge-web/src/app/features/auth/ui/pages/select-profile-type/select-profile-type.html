@@ -1,0 +1,33 @@
+<main>
+    <header>
+        <div>
+            <p>Bem-vindo ao</p>
+            <h1 class="title">
+                Stack<span>Forge</span>
+            </h1>
+            <small>
+                Desenvolva novas habilidades ou ajude learners a alcançarem seus objetivos _
+            </small>
+        </div>
+    </header>
+
+    <section class="select-profile__options">
+        <div class="card-wrapper">
+            <button type="button" class="profile-card" (click)="selectProfile(profileType.Learner)">
+                <lucide-icon [img]="User" [size]="96" class="my-icon"></lucide-icon>
+                <h2 class="title-button">Learner</h2>
+                <div class="text-button-wrapper">
+                    <p class="text-button">Eu quero aprender uma nova stack.</p>
+                </div>
+            </button>
+
+            <button type="button" class="profile-card" (click)="selectProfile(profileType.Mentor)">
+                <lucide-icon [img]="GraduationCap" [size]="96" class="my-icon"></lucide-icon>
+                <h2 class="title-button">Mentor</h2>
+                <div class="text-button-wrapper">
+                    <p class="text-button">Eu quero mentorar alunos para nova stack.</p>
+                </div>
+            </button>
+        </div>
+    </section>
+</main>
