@@ -1,0 +1,45 @@
+<app-header></app-header>
+<main>
+    <section class="title">
+        <p>Crie sua conta</p>
+        <small>Apoie um learner ou aprenda um nova stack</small>
+    </section>
+    <section class="container">
+        <form [formGroup]="registerUserForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label class="form-label" [class.label-error]="email?.touched && email?.invalid"
+                    for="email">Emaii:</label>
+                <input class="form-input" formControlName="email" [class.input-error]="email?.touched && email?.invalid"
+                    type="email">
+                @if (email?.touched && email?.hasError('required')){
+                <small class="error-message">Email é obrigatório.</small>
+                }
+                @if (email?.touched && email?.hasError('minlength')){
+                <small class="error-message">Email deve ter pelo menos 8 caracteres.</small>
+                }
+            </div>
+            <div class="form-group">
+                <label class="form-label" [class.label-error]="password?.touched && password?.invalid"
+                    for="password">Senha:</label>
+                <input class="form-input" formControlName="password"
+                    [class.input-error]="password?.touched && password?.invalid" type="password">
+                @if (password?.touched && password?.hasError('required')){
+                <small class="error-message">Senha é obrigatória.</small>
+                }
+                @if(password?.touched && password?.hasError('minlength')){
+                <small class="error-message">Senha deve conter pelo menos 8 caracteres.</small>
+                }
+            </div>
+            <div class="form-group">
+                <label class="form-label" [class.label-error]="confirmPassword?.touched && confirmPassword?.invalid || !passwordsMatch()"
+                    for="password">Confirmação de senha:</label>
+                <input class="form-input" formControlName="confirmPassword"
+                    [class.input-error]="confirmPassword?.touched && confirmPassword?.invalid || !passwordsMatch()" type="password">
+                @if(!passwordsMatch()){
+                <small class="error-message">Senhas não coincidem</small>
+                }
+            </div>
+            <app-form-button text="Cadastrar" [disabled]="registerUserForm.invalid" [class.button-disabled]="registerUserForm.invalid"></app-form-button>
+        </form>
+    </section>
+</main>

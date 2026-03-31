@@ -1,0 +1,24 @@
+:host{
+    background-color: aqua;
+}
+
+button{
+    background-color: var(--color-secondary);
+    color: var(--header-color);
+    font-weight: 300;
+    border: 1px solid var(--color-surface);
+    width: 100%;
+    padding: 4px;
+}
+
+button:hover{
+    color: var(--color-primary-hover);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    transition: .7s;
+}
+
+button:active{
+    color: var(--color-secondary);
+    transition: .2s;
+}

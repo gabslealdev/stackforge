@@ -1,0 +1,92 @@
+main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space-5);
+    height: 90vh;
+    width: 100vw;
+
+    & .welcome{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: var(--space-6);
+        height: 10%;
+        width: 100%;
+
+        & small{
+            font-size: var(--font-size-xs);
+        }
+
+
+        & h2 {
+            font-family: var(--font-code);
+            font-weight: lighter;
+            & span {
+                color: var(--color-secondary);
+            }
+            
+        }
+    }
+
+    & .title{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 10%;
+
+        font-size: var(--font-size-lg);
+        font-weight: 250;
+
+    }
+
+    & .container {
+
+        display: flex;
+        justify-content: space-around;
+        height: 80%;
+        width: 50%;
+
+        & .button-wrapper {
+            height: 70%;
+            width: 40%;
+
+            & .profile-button {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: var(--space-2);
+                padding: var(--space-3);
+                width: 100%;
+                height: 100%;
+                border-radius: var(--radius-sm);
+                background-color: var(--header-color);
+                color: var(--color-primary);
+                font-size: var(--font-size-lg);
+
+                & svg {
+                    color: var(--color-primary);
+                }
+            }
+
+            & .profile-button:hover{
+                color: var(--color-secondary);
+                transition: .4s;
+                border: 2px solid var(--color-secondary);
+
+                & svg{
+                    color: var(--color-secondary);
+                    transition: .4s;
+                    
+                }
+            }
+
+            & .profile-button:active{
+                background-color: var(--color-surface);
+                border: 2px solid var(--color-border);
+            }
+        }
+    }
+}
