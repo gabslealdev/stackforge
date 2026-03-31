@@ -23,7 +23,6 @@ namespace StackForge.Infrastructure.Data.Mappings.Identity
                     email => email.Value,
                     value => Email.Create(value))
                 .HasColumnName("email")
-                .HasMaxLength(8)
                 .HasMaxLength(254)
                 .IsRequired();
 

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<main>
+    <section class="welcome">
+        <small>SEJA BEM-VINDO AO</small>
+        <h2>Stack<span>Forge</span></h2>
+    </section>
+    <section class="title">
+        <p>Selecione o perfil de usuário </p>
+    </section>
+    <section class="container">
+        <div class="button-wrapper">
+            <button class="profile-button" (click)="selectProfile(profileType.Learner)">
+                <svg lucideUserRound [size]="160" [strokeWidth]="1"></svg>
+                Learner
+            </button>
+        </div>
+        <div class="button-wrapper">
+            <button class="profile-button" (click)="selectProfile(profileType.Mentor)">
+                <svg lucideGraduationCap [size]="160" [strokeWidth]="1"></svg>
+                Mentor
+            </button>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,53 @@
+<app-header />
+<main>
+    <section class="title">
+        <h2>HELLO<span>MENTOR</span>!</h2>
+        <p>
+            Aqui você poderá mentorar um learner e compartilhar seus conhecimentos,
+            para tornar a jornada de aprendizado muito mais simples e eficaz.
+            Afinal ninguém chega a lugar nenhum sozinho.
+        </p>
+    </section>
+    <section class="container">
+        <form [formGroup]="registerMentorForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="" class="form-label" [class.has-error]="firstName?.invalid && firstName?.touched">Nome:</label>
+                <input type="text"[class.input-error]= "firstName?.invalid && firstName?.touched" formControlName="firstName" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="" class="form-label"[class.has-error]="lastName?.invalid && lastName?.touched">Sobrenome:</label>
+                <input type="text" [class.input-error]= "lastName?.invalid && lastName?.touched" formControlName="lastName" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="" class="form-label" [class.has-error]="birthDate?.invalid && birthDate?.touched">Data de Nascimento:</label>
+                <input type="date" [class.input-error]= "birthDate?.invalid && birthDate?.touched" formControlName="birthDate" class="form-input">
+            </div>
+            <div class="form-group group-education">
+                <div class="education">
+                    <label for="" [class.has-error]="courseName?.invalid && courseName?.touched" class="form-label">Formação:</label>
+                    <input type="text" [class.input-error]="courseName?.invalid && courseName?.touched" formControlName="courseName" class="form-input">
+                </div>
+                <div class="education">
+                    <label for="" [class.has-error]="institution?.invalid && institution?.touched" class="form-label">Instituição:</label>
+                    <input type="text" [class.input-error]="institution?.invalid && institution?.touched" formControlName="institution" class="form-input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" [class.has-error]="educationStatus?.invalid && educationStatus?.touched" class="form-label">Graduação:</label>
+                <select formControlName="educationStatus">
+                    <option value="0">Cursando</option>
+                    <option value="1">Concluída</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label [class.has-error]="conclusionDate?.invalid && conclusionDate?.touched" for=""  class="form-label">Data de Conclusão:</label>
+                <input type="date" [class.input-error]="conclusionDate?.invalid && conclusionDate?.touched" formControlName="conclusionDate" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="" class="form-label">Bio:</label>
+                <textarea formControlName="bio" rows="5" placeholder="Fale um pouco sobre você"></textarea>
+            </div>
+            <app-form-button text="Cadastrar"></app-form-button>
+        </form>
+    </section>
+</main>
