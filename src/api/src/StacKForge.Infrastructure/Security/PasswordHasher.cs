@@ -2,6 +2,7 @@
 using System.Text;
 using Konscious.Security.Cryptography;
 using StackForge.Application.Identity.Interfaces.Security;
+using StackForge.Domain.Identity.ValueObjects;
 
 namespace StackForge.Infrastructure.Security
 {
@@ -23,9 +24,9 @@ namespace StackForge.Infrastructure.Security
                 Convert.ToBase64String(hash));
         }
 
-        public bool Verify(string password, string passwordHash)
+        public bool Verify(string password, PasswordHash passwordHash)
         {
-            var parts = passwordHash.Split('.');
+            var parts = passwordHash.Value.Split('.');
 
             if (parts.Length != 2)
                 return false;

@@ -4,11 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
+using StackForge.Application.Identity.UseCases.LoginUser;
 using StackForge.Application.Identity.UseCases.RegisterUser;
 using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Profile.UseCases.RegisterLearner;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Shared.Abstractions;
+using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
 using StackForge.Infrastructure.Data.Repositories.Identity;
 using StackForge.Infrastructure.Data.Repositories.Profile;
@@ -38,6 +40,9 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<RegisterUserHandler>();
             services.AddScoped<RegisterLearnerHandler>();
             services.AddScoped<RegisterMentorHandler>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<LoginUserHandler>();
+            services.AddScoped<IValidator<LoginUserCommand>, LoginUserCommandValidator>();
 
             return services;
         }
