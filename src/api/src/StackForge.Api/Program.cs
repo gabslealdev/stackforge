@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using StackForge.Infrastructure.Authentication;
+using StackForge.Infrastructure.Data.Seed.Extensions;
 using StackForge.Infrastructure.DependencyInjection;
 using System.Text;
 
@@ -28,8 +29,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.Configure<JwtOptions>(
-    builder.Configuration.GetSection("Jwt"));
 
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var secretKey = jwtSection["SecretKey"]!;
@@ -56,7 +55,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("MentorOnly", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("profileType", "Mentor");
+    });
 
 var app = builder.Build();
 
@@ -68,9 +72,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("StackForgeWeb");
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
 app.MapGet("/", () => Results.Ok(new { status = "Ok"})).WithName("HealthCheck");
+
+await app.Services.InitializeStackAsync();
 
 app.Run();

@@ -6,7 +6,7 @@ namespace StackForge.Domain.Identity.ValueObjects
 {
     public sealed record PasswordHash : ValueObject
     {
-        public string Value { get; }
+        public string Value { get; } = string.Empty;
         private PasswordHash(string value)
         {
             Value = value;

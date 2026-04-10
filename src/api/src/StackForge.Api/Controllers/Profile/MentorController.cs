@@ -1,7 +1,11 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StackForge.Api.Contracts.Profile.MentorProfile.Requests;
+using StackForge.Application.Profile.UseCases.AddStackToMentor;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Shared.Results;
+using System.Security.Claims;
 
 namespace StackForge.Api.Controllers.Profile
 {
@@ -9,13 +13,20 @@ namespace StackForge.Api.Controllers.Profile
     [Route("api/profile/mentor")]
     public sealed class MentorController : ControllerBase
     {
-        private readonly RegisterMentorHandler _handler;
-        private readonly IValidator<RegisterMentorCommand> _validator;
+        private readonly RegisterMentorHandler _registerMentorHandler;
+        private readonly IValidator<RegisterMentorCommand> _registerMentorValidator;
+        private readonly AddStackToMentorHandler _addStackToMentorHandler;
+        private readonly IValidator<AddStackToMentorCommand> _addStackToMentorValidator;
 
-        public MentorController(RegisterMentorHandler handler, IValidator<RegisterMentorCommand> validator)
+        public MentorController(RegisterMentorHandler registerMentorHandler, 
+            IValidator<RegisterMentorCommand> registerMentorValidator, 
+            IValidator<AddStackToMentorCommand> addStackToMentorValidator,
+            AddStackToMentorHandler addStackToMentorHandler)
         {
-            _handler = handler;
-            _validator = validator;
+            _registerMentorHandler = registerMentorHandler;
+            _registerMentorValidator = registerMentorValidator;
+            _addStackToMentorValidator = addStackToMentorValidator;
+            _addStackToMentorHandler = addStackToMentorHandler;
         }
 
         [HttpPost]
@@ -23,7 +34,7 @@ namespace StackForge.Api.Controllers.Profile
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterMentorCommand command)
         {
-            var validationResult = await _validator.ValidateAsync(command);
+            var validationResult = await _registerMentorValidator.ValidateAsync(command);
 
             if (!validationResult.IsValid)
             {
@@ -36,7 +47,7 @@ namespace StackForge.Api.Controllers.Profile
                 return BadRequest(errors);
             }
 
-            Result<RegisterMentorResponse> result = await _handler.HandleAsync(command);
+            Result<RegisterMentorResponse> result = await _registerMentorHandler.HandleAsync(command);
 
             if (result.IsFailure)
             {
@@ -48,6 +59,48 @@ namespace StackForge.Api.Controllers.Profile
             }
 
             return Created(string.Empty, result.Value);
+        }
+
+        [Authorize(Policy = "MentorOnly")]
+        [HttpPost("stacks")]
+        [ProducesResponseType(typeof(AddStackToMentorResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AddStack([FromBody] AddStackToMentorRequest request)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+             
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var command = new AddStackToMentorCommand(userId, request.StackId);
+
+            var validationResult = await _addStackToMentorValidator.ValidateAsync(command);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(error => new
+                {
+                    property = error.PropertyName,
+                    message = error.ErrorMessage
+                });
+
+                return BadRequest(errors);
+            }
+
+            Result<AddStackToMentorResponse> result = await _addStackToMentorHandler.HandleAsync(command);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(new
+                {
+                    result.Error.Code,
+                    result.Error.Message
+                });
+            }
+
+            return Ok(result.Value);
         }
     }
 }

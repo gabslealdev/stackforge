@@ -9,9 +9,9 @@ namespace StackForge.Domain.Profile.ValueObjects
     {
         private const int MinLength = 2;
         private const int MaxLength = 100;
-        public string CourseName { get;  private set; }
-        public string Institution { get;  private set; }
-        public EducationStatus Status { get; private set; }
+        public string CourseName { get; private set; } = string.Empty;
+        public string Institution { get;  private set; } = string.Empty;
+        public EducationStatus Status { get; private set;}
         public DateOnly ConclusionDate { get; private set; }
 
         private Education(string courseName, string institution, EducationStatus status, DateOnly conclusionDate )

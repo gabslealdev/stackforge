@@ -6,8 +6,8 @@ namespace StackForge.Domain.Identity.Entities
 {
     public sealed class User : Entity
     {
-        public Email Email { get; private set; }
-        public PasswordHash PasswordHash { get; private set; }
+        public Email Email { get; private set; } = null!;
+        public PasswordHash PasswordHash { get; private set; } = null!;
 
         private User(Email email, PasswordHash passwordHash)
         {

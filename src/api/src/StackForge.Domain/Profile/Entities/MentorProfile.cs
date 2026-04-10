@@ -12,7 +12,7 @@ namespace StackForge.Domain.Profile.Entities
         public IReadOnlyCollection<Stack> Stacks => _stacks.AsReadOnly();
 
 
-        public Education Education { get; private set; }
+        public Education Education { get; private set; } = null!;
         public Bio? Bio { get; private set; }
         public AvailabilityStatus Availability { get; private set; }
 

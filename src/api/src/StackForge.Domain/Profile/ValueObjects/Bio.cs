@@ -8,7 +8,7 @@ namespace StackForge.Domain.Profile.ValueObjects
     {
         private const int MinLength = 10;
         private const int MaxLength = 500;
-        public string Value { get; private set; }
+        public string Value { get; private set; } = string.Empty;
         private Bio(string value)
         {
             Value = value;

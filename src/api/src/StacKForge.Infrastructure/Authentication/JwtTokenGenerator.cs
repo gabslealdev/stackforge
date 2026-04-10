@@ -21,7 +21,7 @@ namespace StackForge.Infrastructure.Authentication
         {
             var claims = new List<Claim>
             {
-                new (JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new (JwtRegisteredClaimNames.Sub, userId.ToString()), 
                 new (JwtRegisteredClaimNames.Email, email.Value),
                 new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new ("profileType", profileType)
@@ -31,7 +31,7 @@ namespace StackForge.Infrastructure.Authentication
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expires = DateTime.UtcNow.AddMinutes(_options.ExpiresInMinutes);
+            var expires = DateTime.UtcNow.AddMinutes(_options.ExpirationInMinutes);
 
             var token = new JwtSecurityToken(
                 issuer: _options.Issuer,
@@ -43,6 +43,6 @@ namespace StackForge.Infrastructure.Authentication
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public DateTimeOffset GetTokenExpiration() => DateTimeOffset.UtcNow.AddMinutes(_options.ExpiresInMinutes);
+        public DateTimeOffset GetTokenExpiration() => DateTimeOffset.UtcNow.AddMinutes(_options.ExpirationInMinutes);
     }
 }
