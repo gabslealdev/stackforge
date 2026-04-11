@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.Profile.MentorProfile.Requests;
 using StackForge.Application.Profile.UseCases.AddStackToMentor;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
+using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
 using System.Security.Claims;
 
@@ -17,16 +18,19 @@ namespace StackForge.Api.Controllers.Profile
         private readonly IValidator<RegisterMentorCommand> _registerMentorValidator;
         private readonly AddStackToMentorHandler _addStackToMentorHandler;
         private readonly IValidator<AddStackToMentorCommand> _addStackToMentorValidator;
+        private readonly UpdateMentorAvailabilityHandler _updateMentorAvailability;
 
         public MentorController(RegisterMentorHandler registerMentorHandler, 
             IValidator<RegisterMentorCommand> registerMentorValidator, 
             IValidator<AddStackToMentorCommand> addStackToMentorValidator,
-            AddStackToMentorHandler addStackToMentorHandler)
+            AddStackToMentorHandler addStackToMentorHandler,
+            UpdateMentorAvailabilityHandler updateMentorAvailability)
         {
             _registerMentorHandler = registerMentorHandler;
             _registerMentorValidator = registerMentorValidator;
             _addStackToMentorValidator = addStackToMentorValidator;
             _addStackToMentorHandler = addStackToMentorHandler;
+            _updateMentorAvailability = updateMentorAvailability;
         }
 
         [HttpPost]
@@ -102,5 +106,26 @@ namespace StackForge.Api.Controllers.Profile
 
             return Ok(result.Value);
         }
+
+        [Authorize(Policy = "MentorOnly")]
+        [HttpPatch("availability")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateAvailability([FromBody] UpdateMentorAvailabilityRequest request)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var command = new UpdateMentorAvailabilityCommand(userId, request.IsAvailable);
+
+            await _updateMentorAvailability.HandleAsync(command);
+
+            return NoContent();
+
+        }
+
     }
 }
