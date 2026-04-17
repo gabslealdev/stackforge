@@ -31,6 +31,13 @@ namespace StackForge.Infrastructure.Data.Repositories.Profile
             return mentorProfile;
         }
 
+        public async Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId)
+        {
+            var mentorProfile = await _context.Mentors.Include(x =>  x.Stacks).FirstOrDefaultAsync(x => x.UserId == userId);
+
+            return mentorProfile;
+        }
+
         public void Update(MentorProfile mentorProfile)
         {
             _context.Mentors.Update(mentorProfile);

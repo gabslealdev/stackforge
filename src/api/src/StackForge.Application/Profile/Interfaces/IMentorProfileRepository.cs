@@ -10,6 +10,10 @@ namespace StackForge.Application.Profile.Interfaces
 
         Task<MentorProfile?> GetByUserIdAsync(Guid userId);
 
+        Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId);
+
         void Update(MentorProfile mentorProfile);
+
+        
     }
 }
