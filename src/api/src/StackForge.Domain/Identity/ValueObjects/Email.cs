@@ -10,7 +10,7 @@ namespace StackForge.Domain.Identity.ValueObjects
         private const int MinLength = 8; 
         private const int MaxLength = 254;
 
-        public string Value { get;}
+        public string Value { get;} = string.Empty;
 
         private Email(string value)
         {

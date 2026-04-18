@@ -7,7 +7,7 @@ namespace StackForge.Domain.Profile.Entities
 {
     public abstract class Profile : Entity
     {
-        public Name Name { get; private set; }
+        public Name Name { get; private set; } = null!;
         public Guid UserId { get; private set; }
         public DateOnly BirthDate { get; private set; }
         public DateTimeOffset CreatedAt { get; private set; }

@@ -8,8 +8,8 @@ namespace StackForge.Domain.Profile.ValueObjects
     {
         private const int MinLength = 3;
         private const int MaxLength = 80;
-        public string FirstName { get; } 
-        public string LastName { get; }
+        public string FirstName { get; } = string.Empty;
+        public string LastName { get; } = string.Empty;
 
         private Name(string firstName, string lastName)
         {

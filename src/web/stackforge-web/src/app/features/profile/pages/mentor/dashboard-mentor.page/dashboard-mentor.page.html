@@ -1,0 +1,25 @@
+<app-header></app-header>
+<main>
+    <section class="profile-summary">
+        @if (mentor(); as currentMentor){
+            <app-mentor-summary [mentor]="currentMentor"></app-mentor-summary>
+        } @else if (isLoading()){
+            <p>Carregando...</p>
+        }
+        @else {
+            <p>{{ errorMessage() || 'Dados do mentor não carregados'}}</p>
+        }
+    </section>
+    <section class="dashboard-container">
+        <div class="header">
+            <nav class="nav-links">
+                <a>Add Stack</a>
+                <a>Mentorias</a>
+                <a>Convites</a>
+            </nav>
+        </div>
+        <section class="currentSection">
+            <app-mentor-add-stack></app-mentor-add-stack>
+        </section>
+    </section>
+</main>

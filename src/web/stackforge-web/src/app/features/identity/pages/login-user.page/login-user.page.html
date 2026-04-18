@@ -1,0 +1,24 @@
+<main>
+    <section class="container">
+        <div class="avatar">
+            <svg lucideSquareUserRound [size]="120" [strokeWidth]="0.2"></svg>
+        </div>
+        <form [formGroup]="loginUserForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="email" [class.label-error]="email?.invalid && email?.touched">Email</label>
+                <input type="email" id="email" name="email" formControlName="email" [class.input-error]="email?.invalid && email?.touched" required>
+                @if (email?.invalid && email?.touched) {
+                    <small class="error-message">Email é obrigatório.</small>
+                }
+            </div>
+            <div class="form-group">
+                <label for="password" [class.label-error]="password?.invalid && password?.touched">Password</label>
+                <input type="password" id="password" name="password" formControlName="password" [class.input-error]="password?.invalid && password?.touched" required>
+                @if (password?.invalid && password?.touched) {
+                    <small class="error-message">Senha é obrigatória.</small>
+                }
+            </div>
+            <app-form-button text="Entrar"></app-form-button>
+        </form>
+    </section>
+</main>

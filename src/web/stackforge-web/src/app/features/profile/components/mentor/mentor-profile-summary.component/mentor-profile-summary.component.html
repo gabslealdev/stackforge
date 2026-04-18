@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="profile-avatar">
+        <svg lucideSquareUserRound [size]="230" [strokeWidth]="0.1"></svg>
+    </div>
+    <section class="profile-info">
+        <div class="fullname">
+            <h2>{{ mentor().fullName }}</h2>
+        </div>
+        <div class="availability-status">
+            <small
+                [class.available]="mentor().availability === 'Available'"
+                [class.unavailable]="mentor().availability === 'Unavailable'">
+                {{ mentor().availability }}</small>
+        </div>
+        <div class="education">
+            <p>{{ mentor().courseName}} - {{ mentor().institution }}</p>
+        </div>
+        <div class="bio">
+            <p>{{ mentor().bio }}</p>
+        </div>
+        
+        <div class="stacks">
+            @if (mentor().stacks.length > 0){
+                @for (stack of mentor().stacks; track stack.id){
+                    <app-stack-chip [stack]="stack"></app-stack-chip>
+                }
+            }
+            @else {
+                <p>Nenhuma stack cadastrada.</p>
+            }
+        </div>
+    </section>
+</div>

@@ -4,14 +4,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
+using StackForge.Application.Identity.UseCases.LoginUser;
 using StackForge.Application.Identity.UseCases.RegisterUser;
 using StackForge.Application.Profile.Interfaces;
+using StackForge.Application.Profile.UseCases.AddStackToMentor;
+using StackForge.Application.Profile.UseCases.GetAllStacks;
+using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterLearner;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
+using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Abstractions;
+using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
 using StackForge.Infrastructure.Data.Repositories.Identity;
 using StackForge.Infrastructure.Data.Repositories.Profile;
+using StackForge.Infrastructure.Data.Seed;
 using StackForge.Infrastructure.Data.UnitOfWork;
 using StackForge.Infrastructure.Security;
 
@@ -38,6 +45,16 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<RegisterUserHandler>();
             services.AddScoped<RegisterLearnerHandler>();
             services.AddScoped<RegisterMentorHandler>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<LoginUserHandler>();
+            services.AddScoped<IValidator<LoginUserCommand>, LoginUserCommandValidator>();
+            services.AddScoped<StackSeeder>();
+            services.AddScoped<IStackRepository, StackRepository>();
+            services.AddScoped<GetAllStacksHandler>();
+            services.AddScoped<IValidator<AddStackToMentorCommand>, AddStackToMentorCommandValidator>();
+            services.AddScoped<AddStackToMentorHandler>();
+            services.AddScoped<UpdateMentorAvailabilityHandler>();
+            services.AddScoped<GetCurrentMentorHandler>();
 
             return services;
         }
