@@ -9,8 +9,10 @@ using StackForge.Application.Identity.UseCases.RegisterUser;
 using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Profile.UseCases.AddStackToMentor;
 using StackForge.Application.Profile.UseCases.GetAllStacks;
+using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterLearner;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
+using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Abstractions;
 using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
@@ -51,6 +53,8 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<GetAllStacksHandler>();
             services.AddScoped<IValidator<AddStackToMentorCommand>, AddStackToMentorCommandValidator>();
             services.AddScoped<AddStackToMentorHandler>();
+            services.AddScoped<UpdateMentorAvailabilityHandler>();
+            services.AddScoped<GetCurrentMentorHandler>();
 
             return services;
         }

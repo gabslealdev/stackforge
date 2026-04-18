@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & div {
+            font-size: var(--font-size-sm);
+            font-weight: 200;
+        }
+
+        & .fullname {
+            & h2 {
+                font-family: var(--font-code);
+                font-size: var(--font-size-lg);
+                font-weight: lighter;
+                margin-bottom: -.5rem;
+            }
+        }
+
+        & small {
+            font-weight: 300;
+        }
+
+        & .available{
+            color: var(--color-success);
+        }
+
+        & .unavailable{
+            color: var(--color-danger)
+        }
+
+        & .education {
+            margin-top: var(--space-1);
+        }
+
+        & .bio {
+            width: 90%;
+            text-align: center;
+            margin-top: var(--space-1);
+        }
+
+        & .stacks {
+            margin-top: var(--space-3);
+            padding-inline: var(--space-4);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+    }
+}

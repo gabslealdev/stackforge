@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.Profile.MentorProfile.Requests;
 using StackForge.Application.Profile.UseCases.AddStackToMentor;
+using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
@@ -19,18 +20,21 @@ namespace StackForge.Api.Controllers.Profile
         private readonly AddStackToMentorHandler _addStackToMentorHandler;
         private readonly IValidator<AddStackToMentorCommand> _addStackToMentorValidator;
         private readonly UpdateMentorAvailabilityHandler _updateMentorAvailability;
+        private readonly GetCurrentMentorHandler _getCurrentMentorHandler;
 
         public MentorController(RegisterMentorHandler registerMentorHandler, 
             IValidator<RegisterMentorCommand> registerMentorValidator, 
             IValidator<AddStackToMentorCommand> addStackToMentorValidator,
             AddStackToMentorHandler addStackToMentorHandler,
-            UpdateMentorAvailabilityHandler updateMentorAvailability)
+            UpdateMentorAvailabilityHandler updateMentorAvailability,
+            GetCurrentMentorHandler getCurrentMentorHandler)
         {
             _registerMentorHandler = registerMentorHandler;
             _registerMentorValidator = registerMentorValidator;
             _addStackToMentorValidator = addStackToMentorValidator;
             _addStackToMentorHandler = addStackToMentorHandler;
             _updateMentorAvailability = updateMentorAvailability;
+            _getCurrentMentorHandler = getCurrentMentorHandler;
         }
 
         [HttpPost]
@@ -126,6 +130,35 @@ namespace StackForge.Api.Controllers.Profile
             return NoContent();
 
         }
+
+        [Authorize(Policy = "MentorOnly")]
+        [HttpGet("me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetCurrentMentor()
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var query = new GetCurrentMentorQuery(userId);
+
+            Result<GetCurrentMentorResponse> result = await _getCurrentMentorHandler.HandleAsync(query);
+
+            if(result.IsFailure)
+            {
+                return BadRequest(new
+                {
+                    result.Error.Code,
+                    result.Error.Message
+                });
+            }
+
+            return Ok(result.Value);
+        }
+
 
     }
 }

@@ -1,0 +1,23 @@
+<main>
+    <div class="container">
+        <div class="title">
+            <h2>
+                Selecione as stacks para o seu perfil
+            </h2>
+        </div>
+        <section class="stacks">
+            @for (stack of stacks(); track stack.id){
+            <app-stack-chip 
+                [stack]="stack" 
+                [selected]="isSelected(stack.id)"
+                [saved]="isSaved(stack.id)"
+                [disabled]="isSaved(stack.id)"
+                (stackSelected)="selectedStack($event)"
+                (stackDeselected)="deselectedStack($event)"></app-stack-chip>
+            }
+        </section>
+        <div class="button-wrapper">
+             <app-action-button label="Adicionar Stack" [disabled]="selectedStacks().length === 0 || isSaving()" (clicked)="submitSelectedStacks()"></app-action-button>
+        </div> 
+    </div>
+</main>

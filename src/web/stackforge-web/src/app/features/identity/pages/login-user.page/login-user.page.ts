@@ -5,6 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserService } from '../../services/login-user.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { LoginUserRequest } from '../../models/request/login-user.request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-user.page',
@@ -17,6 +18,7 @@ export class LoginUserPage {
   private readonly _loginService = inject(LoginUserService)
   private readonly _authService = inject(AuthService)
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly _router = inject(Router);
 
   protected apiErrorMessage: string | null = null;
 
@@ -47,12 +49,9 @@ export class LoginUserPage {
     this._loginService.login(loginRequest).subscribe({
       next: (response) => {
         this._authService.saveSession(response)
-
-        console.log("Token salvo:", this._authService.getToken());
-        console.log("Expires em:", this._authService.getExpiresAt());
-        console.log("Perfil:", this._authService.getProfileType());
-
         this.loginUserForm.reset();
+
+        this._router.navigate(['mentor/dashboard'])
       },
 error: (error) => {
             console.error("Erro ao realizar login", error.status);

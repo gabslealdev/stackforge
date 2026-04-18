@@ -1,0 +1,14 @@
+<div
+    type="button"
+    class="stack-chip"
+    [class.selected]="selected()"
+    [class.saved]="saved()"
+    (click)="onClick()"
+>
+    {{ stack().name }} 
+    @if (selected()){
+        <button (click)="onRemoveClick($event)">
+            <svg lucideSquareX [size]="18" [strokeWidth]="3"></svg> 
+        </button>
+    }
+</div>

@@ -34,7 +34,10 @@ namespace StackForge.Infrastructure.Data.Seed
             Stack.Create("Networking", Key.Create("networking")),
             Stack.Create("Cybersecurity", Key.Create("cybersecurity")),
             Stack.Create("Linux", Key.Create("linux")),
-            Stack.Create("Docker", Key.Create("docker"))
+            Stack.Create("Docker", Key.Create("docker")),
+            Stack.Create("Rust", Key.Create("rust")),
+            Stack.Create("Pandas", Key.Create("pandas"))
+
         ];
     }
 }

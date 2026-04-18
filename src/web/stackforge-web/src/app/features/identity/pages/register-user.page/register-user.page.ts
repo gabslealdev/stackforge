@@ -5,7 +5,6 @@ import { RegistrationFlowService } from '../../../../shared/services/registratio
 import { Router } from '@angular/router';
 import { Header } from '../../../../layout/header/header';
 import { FormButtonComponent } from '../../../../shared/ui/components/form-button.component/form-button.component';
-import { ProfileType } from '../../models/enums/profile-type.enum';
 
 
 @Component({
@@ -72,17 +71,7 @@ export class RegisterUserPage {
     this._registerUserService.registerUser(request).subscribe({
       next: (response) => {
         this._registrationFlowService.setUserId(response.userId)
-        console.log(response)
-
-        if(selectedProfileType == ProfileType.Learner){
-          this._router.navigate(['register/user/learner'])
-        }
-
-        if(selectedProfileType == ProfileType.Mentor){
-          this._router.navigate(['register/user/mentor'])
-        }
-
-        // enviar para rota de mentor se for mentor
+        this._router.navigate(['login/user'])
       } ,
       error: (error) => {
         console.error('Error registering user', error)
