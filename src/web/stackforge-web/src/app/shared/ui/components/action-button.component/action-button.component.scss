@@ -1,6 +1,14 @@
 button {
     font-family: var(--font-code);
-    background-color: var(--color-primary);
+    background-color: var(--fill);
+    color: var(--text-primary);
     padding: .5rem;
     border-radius: 6px;
+    animation: gradientMove 6s ease infinite;
+
+}
+
+button:hover {
+    background: linear-gradient(30deg, var(--fill), var(--fill-secondary));
+    transition: 1s;
 }

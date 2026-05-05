@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { StackService } from '../../../services/stack.service';
 import { Stack } from '../../../models/Stacks/stacks.response';
 import { StackChipComponent } from '../../stack-chip.component/stack-chip.component';
@@ -15,6 +15,8 @@ import { ActionButtonComponent } from '../../../../../shared/ui/components/actio
   styleUrl: './mentor-add-stack.component.scss',
 })
 export class MentorAddStackComponent implements OnInit {
+  stackAdded = output<void>();
+
   private readonly _stackService = inject(StackService);
   private readonly _mentorProfileService = inject(MentorProfileService);
 
@@ -68,7 +70,8 @@ export class MentorAddStackComponent implements OnInit {
       next: () => {
         this.savedStacks.update(ids => [...ids, ...stackIds]);
         this.selectedStacks.set([]);
-        this.isSaving.set(false)
+        this.isSaving.set(false);
+        this.stackAdded.emit();
       },
       error: (error) => {
         console.error('Erro ao salvar stacks', error);

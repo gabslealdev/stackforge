@@ -1,5 +1,12 @@
 header{
     display: flex;
     height: 10vh;
-    background-color: var(--header-color);
+    background-color: var(--surface);
+
+    & img {
+        max-width: 200px;
+        height: auto;
+        object-fit: contain;
+        margin-inline: var(--space-1);
+    }
 }
