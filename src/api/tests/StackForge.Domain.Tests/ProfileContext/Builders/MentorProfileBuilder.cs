@@ -3,7 +3,7 @@ using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Domain.ProfileContext.Enums;
 using StackForge.Domain.ProfileContext.ValueObjects;
 
-namespace StackForge.Domain.Tests.Profile.Builders
+namespace StackForge.Domain.Tests.ProfileContext.Builders
 {
     public sealed class MentorProfileBuilder
     {
@@ -20,6 +20,22 @@ namespace StackForge.Domain.Tests.Profile.Builders
         private string? _institution;
         private EducationStatus? _educationStatus;
         private DateOnly? _conclusionDate;
+
+        public MentorProfileBuilder(string? firstName, string? lastName, AvailabilityStatus? availability,
+            string? courseName, string? institution, EducationStatus? educationStatus, DateOnly? conclusionDate)
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+            _availability = availability;
+            _courseName = courseName;
+            _institution = institution;
+            _educationStatus = educationStatus;
+            _conclusionDate = conclusionDate;
+        }
+
+        public MentorProfileBuilder()
+        {
+        }
 
         public MentorProfileBuilder WithName(Name? name)
         {
@@ -63,7 +79,8 @@ namespace StackForge.Domain.Tests.Profile.Builders
             var educationStatus = _educationStatus ?? EducationStatus.Completed;
             var conclusionDate = _conclusionDate ?? DateOnly.FromDateTime(_faker.Date.Past(5));
 
-            return MentorProfile.Create(Name.Create(firstName, lastName), userId, birthDate, Education.Create(courseName, institution, educationStatus, conclusionDate), Bio.Create(textBio));
+            return MentorProfile.Create(Name.Create(firstName, lastName), userId, birthDate, 
+                Education.Create(courseName, institution, educationStatus, conclusionDate), Bio.Create(textBio));
         }
 
     }

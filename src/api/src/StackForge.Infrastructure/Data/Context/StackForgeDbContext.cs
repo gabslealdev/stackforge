@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StackForge.Domain.Identity.Entities;
-using StackForge.Domain.Profile.Entities;
-using StackForge.Domain.Stacks.Entities;
+using StackForge.Domain.IdentityContext.Entities;
+using StackForge.Domain.ProfileContext.Entities;
+using StackForge.Domain.StacksContext.Entities;
 
 namespace StackForge.Infrastructure.Data.Context
 {

@@ -3,7 +3,7 @@ using Shouldly;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.StacksContext.ValueObjects;
 
-namespace StackForge.Domain.Tests.Stacks.ValueObjects
+namespace StackForge.Domain.Tests.StacksContext.ValueObjects
 {
     public class KeyUnitTest
     {

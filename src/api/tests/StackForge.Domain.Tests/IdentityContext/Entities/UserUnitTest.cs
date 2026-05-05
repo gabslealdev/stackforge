@@ -1,8 +1,8 @@
 ﻿using Bogus;
 using Shouldly;
-using StackForge.Domain.Tests.Identity.Builders;
+using StackForge.Domain.Tests.IdentityContext.Builders;
 
-namespace StackForge.Domain.Tests.Identity.Entities
+namespace StackForge.Domain.Tests.IdentityContext.Entities
 {
     public class UserUnitTest
     {

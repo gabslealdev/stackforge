@@ -2,16 +2,22 @@
 using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Domain.ProfileContext.ValueObjects;
 
-namespace StackForge.Domain.Tests.Profile.Builders
+namespace StackForge.Domain.Tests.ProfileContext.Builders
 {
     public sealed class LearnerProfileBuilder
     {
         private readonly Faker _faker = new();
         private Name? _name;
-        private string? _firstName;
-        private string? _lastName;
+        private readonly string? _firstName;
+        private readonly string? _lastName;
         private Guid? _userId;
         private DateOnly? _birthDate;
+
+        public LearnerProfileBuilder(string? firstName, string? lastName)
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+        }
 
         public LearnerProfileBuilder WithName(Name name)
         {

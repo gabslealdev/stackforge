@@ -1,6 +1,6 @@
-﻿using StackForge.Domain.Profile.ValueObjects;
+﻿using StackForge.Domain.ProfileContext.ValueObjects;
 
-namespace StackForge.Domain.Profile.Entities
+namespace StackForge.Domain.ProfileContext.Entities
 {
     public sealed class LearnerProfile : Profile
     {

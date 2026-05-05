@@ -3,7 +3,7 @@ using Shouldly;
 using StackForge.Domain.ProfileContext.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
 
-namespace StackForge.Domain.Tests.Profile.ValueObjects
+namespace StackForge.Domain.Tests.ProfileContext.ValueObjects
 {
     public class NameUnitTest
     {

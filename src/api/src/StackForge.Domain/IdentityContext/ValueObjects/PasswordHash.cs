@@ -1,8 +1,8 @@
-﻿using StackForge.Domain.Identity.Errors;
+﻿using StackForge.Domain.IdentityContext.Errors;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Shared.ValueObjects;
 
-namespace StackForge.Domain.Identity.ValueObjects
+namespace StackForge.Domain.IdentityContext.ValueObjects
 {
     public sealed record PasswordHash : ValueObject
     {

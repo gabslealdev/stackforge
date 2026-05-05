@@ -1,9 +1,9 @@
-﻿using StackForge.Domain.Profile.Errors;
-using StackForge.Domain.Profile.ValueObjects;
+﻿using StackForge.Domain.ProfileContext.Errors;
+using StackForge.Domain.ProfileContext.ValueObjects;
 using StackForge.Domain.Shared.Entities;
 using StackForge.Domain.Shared.Exceptions;
 
-namespace StackForge.Domain.Profile.Entities
+namespace StackForge.Domain.ProfileContext.Entities
 {
     public abstract class Profile : Entity
     {

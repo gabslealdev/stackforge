@@ -2,7 +2,7 @@
 using StackForge.Domain.IdentityContext.Entities;
 using StackForge.Domain.IdentityContext.ValueObjects;
 
-namespace StackForge.Domain.Tests.Identity.Builders
+namespace StackForge.Domain.Tests.IdentityContext.Builders
 {
     public sealed class UserBuilder
     {

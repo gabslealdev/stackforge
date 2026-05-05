@@ -1,4 +1,4 @@
-﻿namespace StackForge.Domain.Identity.Enums
+﻿namespace StackForge.Domain.IdentityContext.Enums
 {
     public enum ProfileType
     {

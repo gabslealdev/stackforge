@@ -2,7 +2,7 @@
 using StackForge.Domain.IdentityContext.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
 
-namespace StackForge.Domain.Tests.Identity.ValueObjects
+namespace StackForge.Domain.Tests.IdentityContext.ValueObjects
 {
     public class PasswordHashUnitTest
     {

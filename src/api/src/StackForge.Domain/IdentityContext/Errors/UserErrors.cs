@@ -1,6 +1,6 @@
 ﻿using StackForge.Domain.Shared.Errors;
 
-namespace StackForge.Domain.Identity.Errors
+namespace StackForge.Domain.IdentityContext.Errors
 {
     public static class UserError
     {

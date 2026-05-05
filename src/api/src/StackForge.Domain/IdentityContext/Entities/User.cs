@@ -1,8 +1,7 @@
-﻿
-using StackForge.Domain.Identity.ValueObjects;
+﻿using StackForge.Domain.IdentityContext.ValueObjects;
 using StackForge.Domain.Shared.Entities;
 
-namespace StackForge.Domain.Identity.Entities
+namespace StackForge.Domain.IdentityContext.Entities
 {
     public sealed class User : Entity
     {

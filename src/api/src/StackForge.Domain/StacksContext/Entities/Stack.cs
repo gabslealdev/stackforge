@@ -1,10 +1,10 @@
-﻿using StackForge.Domain.Profile.Entities;
+﻿using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Domain.Shared.Entities;
 using StackForge.Domain.Shared.Exceptions;
-using StackForge.Domain.Stacks.Errors;
-using StackForge.Domain.Stacks.ValueObjects;
+using StackForge.Domain.StacksContext.Errors;
+using StackForge.Domain.StacksContext.ValueObjects;
 
-namespace StackForge.Domain.Stacks.Entities
+namespace StackForge.Domain.StacksContext.Entities
 {
     public sealed class Stack : Entity
     {

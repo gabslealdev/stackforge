@@ -1,9 +1,9 @@
-﻿using StackForge.Domain.Identity.Errors;
+﻿using System.Text.RegularExpressions;
+using StackForge.Domain.IdentityContext.Errors;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Shared.ValueObjects;
-using System.Text.RegularExpressions;
 
-namespace StackForge.Domain.Identity.ValueObjects
+namespace StackForge.Domain.IdentityContext.ValueObjects
 {
     public sealed record Email : ValueObject
     {

@@ -3,9 +3,8 @@ using Shouldly;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.StacksContext.Entities;
 using StackForge.Domain.StacksContext.ValueObjects;
-using StackForge.Domain.Tests.Stacks.Builders;
 
-namespace StackForge.Domain.Tests.Stacks.Entities
+namespace StackForge.Domain.Tests.StacksContext.Entities
 {
     public class StackUnitTest
     {

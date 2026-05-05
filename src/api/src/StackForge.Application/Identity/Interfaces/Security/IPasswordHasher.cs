@@ -1,4 +1,4 @@
-﻿using StackForge.Domain.Identity.ValueObjects;
+﻿using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.Interfaces.Security
 {

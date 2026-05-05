@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using StackForge.Api.Contracts.IdentityContext.LoginUser.Request;
+using StackForge.Api.Contracts.IdentityContext.LoginUser.Response;
 using StackForge.Application.Identity.UseCases.LoginUser;
 using StackForge.Application.Shared.Results;
 
-namespace StackForge.Api.Controllers.Identity
+namespace StackForge.Api.Controllers.IdentityContext
 {
     [ApiController]
     [Route("api/identity/login")]
@@ -21,8 +23,10 @@ namespace StackForge.Api.Controllers.Identity
         [HttpPost]
         [ProducesResponseType(typeof(LoginUserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        public async Task<IActionResult> Login([FromBody] LoginUserRequestDto request)
         {
+            var command = new LoginUserCommand(request.Email, request.Password);
+            
             var validationResult = await _validator.ValidateAsync(command);
 
             if (!validationResult.IsValid)
@@ -45,7 +49,10 @@ namespace StackForge.Api.Controllers.Identity
                     message = result.Error.Message
                 });
             }
-            return Ok(result.Value);
+            
+            var response = new LoginUserResponseDto(result.Value.AccessToken, result.Value.Expiration, result.Value.ProfileType);
+            
+            return Ok(response);
         }
     }
 }

@@ -1,15 +1,20 @@
-﻿using FluentValidation;
+﻿using System.Security.Claims;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StackForge.Api.Contracts.Profile.MentorProfile.Requests;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Request;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Requests;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Responses;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.UpdateMentorAvailability.Request;
 using StackForge.Application.Profile.UseCases.AddStackToMentor;
 using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
-using System.Security.Claims;
+using StackForge.Domain.ProfileContext.Enums;
 
-namespace StackForge.Api.Controllers.Profile
+namespace StackForge.Api.Controllers.ProfileContext
 {
     [ApiController]
     [Route("api/profile/mentor")]
@@ -40,8 +45,23 @@ namespace StackForge.Api.Controllers.Profile
         [HttpPost]
         [ProducesResponseType(typeof(RegisterMentorResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromBody] RegisterMentorCommand command)
+        public async Task<IActionResult> Register([FromBody] RegisterMentorRequestDto request)
         {
+            if(!Guid.TryParse(request.UserId, out var userId))
+                return BadRequest();
+
+
+            var command = new RegisterMentorCommand(
+                userId,
+                request.FirstName,
+                request.LastName,
+                request.BirthDate,
+                request.CourseName,
+                request.Institution,
+                request.EducationStatus,
+                request.ConclusionDate,
+                request.Bio
+            );
             var validationResult = await _registerMentorValidator.ValidateAsync(command);
 
             if (!validationResult.IsValid)
@@ -66,6 +86,8 @@ namespace StackForge.Api.Controllers.Profile
                 });
             }
 
+            var response = new RegisterMentorResponseDto(result.Value.MentorId);
+
             return Created(string.Empty, result.Value);
         }
 
@@ -75,7 +97,7 @@ namespace StackForge.Api.Controllers.Profile
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddStack([FromBody] AddStackToMentorRequest request)
+        public async Task<IActionResult> AddStack([FromBody] AddStackToMentorRequestDto request)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
              
@@ -107,8 +129,10 @@ namespace StackForge.Api.Controllers.Profile
                     result.Error.Message
                 });
             }
+            
+            var response = new AddStackToMentorResponseDto(result.Value.StackId, result.Value.StackKey);
 
-            return Ok(result.Value);
+            return Ok(response);
         }
 
         [Authorize(Policy = "MentorOnly")]
@@ -116,7 +140,7 @@ namespace StackForge.Api.Controllers.Profile
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAvailability([FromBody] UpdateMentorAvailabilityRequest request)
+        public async Task<IActionResult> UpdateAvailability([FromBody] UpdateMentorAvailabilityRequestDto request)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

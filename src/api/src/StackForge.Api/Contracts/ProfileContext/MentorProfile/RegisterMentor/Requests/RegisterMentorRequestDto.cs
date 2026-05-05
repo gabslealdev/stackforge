@@ -1,5 +1,5 @@
-﻿namespace StackForge.Api.Contracts.ProfileContext.MentorProfile.Requests
+﻿namespace StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Requests
 {
-    public sealed record RegisterMentorRequestDto(string FirstName, string LastName, DateOnly BirthDate, 
-            string CourseName, string Institution, string EducationStatus, DateOnly ConclusionDate, string? Bio);
+    public sealed record RegisterMentorRequestDto(string UserId, string FirstName, string LastName, DateOnly BirthDate, 
+            string CourseName, string Institution, int EducationStatus, DateOnly ConclusionDate, string? Bio);
 }

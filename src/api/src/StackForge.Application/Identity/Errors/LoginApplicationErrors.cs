@@ -1,6 +1,6 @@
 ﻿using StackForge.Application.Shared.Results;
 
-namespace StackForge.Application.Identity.UseCases.Errors
+namespace StackForge.Application.Identity.Errors
 {
     public static class LoginApplicationErrors
     {

@@ -1,5 +1,5 @@
-﻿using StackForge.Domain.Stacks.Entities;
-using StackForge.Domain.Stacks.ValueObjects;
+﻿using StackForge.Domain.StacksContext.Entities;
+using StackForge.Domain.StacksContext.ValueObjects;
 
 namespace StackForge.Infrastructure.Data.Seed
 {

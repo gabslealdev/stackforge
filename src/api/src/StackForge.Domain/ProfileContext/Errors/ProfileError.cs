@@ -1,11 +1,6 @@
 ﻿using StackForge.Domain.Shared.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StackForge.Domain.Profile.Errors
+namespace StackForge.Domain.ProfileContext.Errors
 {
     public static class ProfileError
     {

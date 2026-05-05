@@ -1,4 +1,4 @@
-﻿using StackForge.Domain.Identity.Enums;
+﻿using StackForge.Domain.IdentityContext.Enums;
 
 namespace StackForge.Application.Identity.UseCases.RegisterUser
 {

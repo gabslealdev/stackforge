@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StackForge.Domain.Profile.Entities;
-using StackForge.Domain.Profile.ValueObjects;
+using StackForge.Domain.ProfileContext.Entities;
+using StackForge.Domain.ProfileContext.ValueObjects;
 
 namespace StackForge.Infrastructure.Data.Mappings.Profile
 {

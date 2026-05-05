@@ -1,12 +1,12 @@
 ﻿using StackForge.Application.Identity.Interfaces.Repository;
+using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
-using StackForge.Application.Profile.UseCases.Errors;
 using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
-using StackForge.Domain.Identity.Enums;
-using StackForge.Domain.Profile.Entities;
-using StackForge.Domain.Profile.Enums;
-using StackForge.Domain.Profile.ValueObjects;
+using StackForge.Domain.IdentityContext.Enums;
+using StackForge.Domain.ProfileContext.Entities;
+using StackForge.Domain.ProfileContext.Enums;
+using StackForge.Domain.ProfileContext.ValueObjects;
 
 namespace StackForge.Application.Profile.UseCases.RegisterMentor
 {
@@ -17,7 +17,10 @@ namespace StackForge.Application.Profile.UseCases.RegisterMentor
         private readonly IMentorProfileRepository _mentorProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterMentorHandler(IUserRepository userRepository, IUserRegistrationRepository userRegistrationRepository, IMentorProfileRepository mentorProfileRepository, IUnitOfWork unitOfWork)
+        public RegisterMentorHandler(IUserRepository userRepository, 
+            IUserRegistrationRepository userRegistrationRepository, 
+            IMentorProfileRepository mentorProfileRepository, 
+            IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _userRegistrationRepository = userRegistrationRepository;

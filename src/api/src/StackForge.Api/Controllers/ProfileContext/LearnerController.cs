@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StackForge.Application.Profile.UseCases.RegisterLearner;
 using StackForge.Application.Shared.Results;
 
-namespace StackForge.Api.Controllers.Profile
+namespace StackForge.Api.Controllers.ProfileContext
 {
     [ApiController]
     [Route("api/profile/learner")]

@@ -1,6 +1,6 @@
 ﻿using StackForge.Domain.Shared.Errors;
 
-namespace StackForge.Domain.Stacks.Errors
+namespace StackForge.Domain.StacksContext.Errors
 {
     public static class StackErrors
     {

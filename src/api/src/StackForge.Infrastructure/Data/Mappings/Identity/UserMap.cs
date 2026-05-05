@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StackForge.Domain.Identity.Entities;
-using StackForge.Domain.Identity.ValueObjects;
+using StackForge.Domain.IdentityContext.Entities;
+using StackForge.Domain.IdentityContext.ValueObjects;
 
 
 namespace StackForge.Infrastructure.Data.Mappings.Identity

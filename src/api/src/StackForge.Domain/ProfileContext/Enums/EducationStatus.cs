@@ -1,4 +1,4 @@
-﻿namespace StackForge.Domain.Profile.Enums
+﻿namespace StackForge.Domain.ProfileContext.Enums
 {
     public enum EducationStatus
     {

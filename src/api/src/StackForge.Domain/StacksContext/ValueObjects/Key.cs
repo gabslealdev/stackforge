@@ -1,14 +1,14 @@
 ﻿using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Shared.ValueObjects;
-using StackForge.Domain.Stacks.Errors;
+using StackForge.Domain.StacksContext.Errors;
 
-namespace StackForge.Domain.Stacks.ValueObjects
+namespace StackForge.Domain.StacksContext.ValueObjects
 {
     public sealed record Key : ValueObject
     {
         private const int MaxLength = 20;
 
-        public string Value { get; private set; }
+        public string Value { get; private set; } = string.Empty;
 
         private Key(string value)
         {

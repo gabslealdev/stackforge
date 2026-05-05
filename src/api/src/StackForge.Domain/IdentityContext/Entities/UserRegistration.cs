@@ -1,7 +1,7 @@
-﻿using StackForge.Domain.Identity.Enums;
+﻿using StackForge.Domain.IdentityContext.Enums;
 using StackForge.Domain.Shared.Entities;
 
-namespace StackForge.Domain.Identity.Entities
+namespace StackForge.Domain.IdentityContext.Entities
 {
     public sealed class UserRegistration : Entity
     {

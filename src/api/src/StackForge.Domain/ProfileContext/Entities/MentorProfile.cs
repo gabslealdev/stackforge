@@ -1,10 +1,10 @@
-﻿using StackForge.Domain.Profile.Enums;
-using StackForge.Domain.Profile.Errors;
-using StackForge.Domain.Profile.ValueObjects;
+﻿using StackForge.Domain.ProfileContext.Enums;
+using StackForge.Domain.ProfileContext.Errors;
+using StackForge.Domain.ProfileContext.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
-using StackForge.Domain.Stacks.Entities;
+using StackForge.Domain.StacksContext.Entities;
 
-namespace StackForge.Domain.Profile.Entities
+namespace StackForge.Domain.ProfileContext.Entities
 {
     public sealed class MentorProfile : Profile
     {

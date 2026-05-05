@@ -1,6 +1,6 @@
 ﻿using StackForge.Domain.Shared.Errors;
 
-namespace StackForge.Domain.Profile.Errors
+namespace StackForge.Domain.ProfileContext.Errors
 {
     public static class EducationError
     {

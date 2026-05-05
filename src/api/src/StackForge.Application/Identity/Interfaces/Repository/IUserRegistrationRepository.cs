@@ -1,4 +1,4 @@
-﻿using StackForge.Domain.Identity.Entities;
+﻿using StackForge.Domain.IdentityContext.Entities;
 
 namespace StackForge.Application.Identity.Interfaces.Repository
 {

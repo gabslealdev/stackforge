@@ -3,10 +3,10 @@ using Shouldly;
 using StackForge.Domain.ProfileContext.Enums;
 using StackForge.Domain.ProfileContext.ValueObjects;
 using StackForge.Domain.Shared.Exceptions;
-using StackForge.Domain.Tests.Profile.Builders;
-using StackForge.Domain.Tests.Stacks.Builders;
+using StackForge.Domain.Tests.ProfileContext.Builders;
+using StackForge.Domain.Tests.StacksContext.Builders;
 
-namespace StackForge.Domain.Tests.Profile.Entities
+namespace StackForge.Domain.Tests.ProfileContext.Entities
 {
     public class MentorUnitTest
     {

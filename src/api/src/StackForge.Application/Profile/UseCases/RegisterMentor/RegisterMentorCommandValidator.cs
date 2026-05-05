@@ -35,11 +35,6 @@ namespace StackForge.Application.Profile.UseCases.RegisterMentor
 
             RuleFor(m => m.ConclusionDate)
                 .NotEmpty().WithMessage("Conclusion date is required.");
-
-            RuleFor(m => m.Bio)
-                .MinimumLength(10).WithMessage("Bio must be at least 10 characters long.")
-                .MaximumLength(100).WithMessage("Bio must be at most 100 characters long.")
-                .When(x => !string.IsNullOrWhiteSpace(x.Bio));
         }
     }
 }

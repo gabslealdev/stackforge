@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StackForge.Application.Profile.Interfaces;
-using StackForge.Domain.Stacks.Entities;
+using StackForge.Domain.StacksContext.Entities;
 using StackForge.Infrastructure.Data.Context;
 
 namespace StackForge.Infrastructure.Data.Repositories.Profile

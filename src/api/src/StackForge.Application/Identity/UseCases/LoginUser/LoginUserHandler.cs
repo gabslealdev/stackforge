@@ -1,9 +1,9 @@
-﻿using StackForge.Application.Identity.Interfaces.Repository;
+﻿using StackForge.Application.Identity.Errors;
+using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
-using StackForge.Application.Identity.UseCases.Errors;
 using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Shared.Results;
-using StackForge.Domain.Identity.ValueObjects;
+using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.UseCases.LoginUser
 {

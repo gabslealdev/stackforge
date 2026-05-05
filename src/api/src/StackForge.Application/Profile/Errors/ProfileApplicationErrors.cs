@@ -1,6 +1,6 @@
 ﻿using StackForge.Application.Shared.Results;
 
-namespace StackForge.Application.Profile.UseCases.Errors
+namespace StackForge.Application.Profile.Errors
 {
     public static class ProfileApplicationErrors
     {

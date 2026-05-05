@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
 using StackForge.Application.Profile.UseCases.GetAllStacks;
-using StackForge.Application.Shared.Results;
 
-namespace StackForge.Api.Controllers.Profile
+namespace StackForge.Api.Controllers.ProfileContext
 {
     [ApiController]
     [Route("api/stacks")]

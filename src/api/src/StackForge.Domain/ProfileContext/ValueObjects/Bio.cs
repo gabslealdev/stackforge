@@ -1,8 +1,8 @@
-﻿using StackForge.Domain.Profile.Errors;
+﻿using StackForge.Domain.ProfileContext.Errors;
 using StackForge.Domain.Shared.Exceptions;
 using StackForge.Domain.Shared.ValueObjects;
 
-namespace StackForge.Domain.Profile.ValueObjects
+namespace StackForge.Domain.ProfileContext.ValueObjects
 {
     public sealed record Bio : ValueObject
     {

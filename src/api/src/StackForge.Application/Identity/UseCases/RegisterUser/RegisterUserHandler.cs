@@ -1,10 +1,10 @@
-﻿using StackForge.Application.Identity.Interfaces.Repository;
+﻿using StackForge.Application.Identity.Errors;
+using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
-using StackForge.Application.Identity.UseCases.Errors;
 using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
-using StackForge.Domain.Identity.Entities;
-using StackForge.Domain.Identity.ValueObjects;
+using StackForge.Domain.IdentityContext.Entities;
+using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.UseCases.RegisterUser
 {

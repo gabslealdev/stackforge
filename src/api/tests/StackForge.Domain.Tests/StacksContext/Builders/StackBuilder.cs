@@ -2,7 +2,7 @@
 using StackForge.Domain.StacksContext.Entities;
 using StackForge.Domain.StacksContext.ValueObjects;
 
-namespace StackForge.Domain.Tests.Stacks.Builders
+namespace StackForge.Domain.Tests.StacksContext.Builders
 {
     public sealed class StackBuilder
     {
