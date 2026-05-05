@@ -1,5 +1,5 @@
-﻿using StackForge.Domain.Identity.Entities;
-using StackForge.Domain.Identity.ValueObjects;
+﻿using StackForge.Domain.IdentityContext.Entities;
+using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.Interfaces.Repository
 {

@@ -1,4 +1,4 @@
 export enum ProfileType{
-    Mentor = 1, 
-    Learner = 2
+    Mentor = "Mentor", 
+    Learner = "Learner"
 }

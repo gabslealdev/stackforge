@@ -5,14 +5,14 @@ div {
     gap: 4px;
     padding-block: 4px;
     padding-inline: 8px;
-    background-color: var(--color-secondary);
-    color: var(--color-background);
+    background-color: var(--card-background);
+    color: var(--text-secondary);
     border-radius: .4rem;
     font-weight: 450;
     font-family: var(--font-code);
 
     & svg {
-        color: var(--color-surface);
+        color: var(--text-primary);
     }
 
     & svg:hover {
@@ -21,9 +21,11 @@ div {
 }
 
 div:hover{
-    background-color: var(--color-secondary-hover);
+    background-color: var(--fill);
+    color: var(--text-primary);
 }
 
 .selected{
-    background-color: var(--color-surface);
+    background-color: var(--fill-secondary);
+    color: var(--color-blocked);
 }

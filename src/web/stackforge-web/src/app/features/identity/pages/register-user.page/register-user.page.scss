@@ -44,13 +44,16 @@ main {
                 gap: .25rem;
 
                 & label {
-                    font-weight: lighter;
+                    font-weight: 320;
+                    color: var(--text-primary);
                 }
 
                 & input {
-                    background-color: var(--background-color);
+                    background-color: var(--surface);
+                    padding: 2px;
                     outline: none;
-                    border: 1px solid var(--color-border);
+                    border: none;
+                    border-radius: var(--radius-sm);
                     color: var(--primary-color)
                 }
 
@@ -59,7 +62,7 @@ main {
                 }
 
                 & .input-error {
-                    border: 1px solid var(--color-danger)
+                    border: 2px solid var(--color-danger)
                 }
 
                 & .error-message {

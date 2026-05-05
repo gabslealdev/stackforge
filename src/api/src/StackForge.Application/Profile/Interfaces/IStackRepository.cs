@@ -1,4 +1,4 @@
-﻿using StackForge.Domain.Stacks.Entities;
+﻿using StackForge.Domain.StacksContext.Entities;
 
 namespace StackForge.Application.Profile.Interfaces
 {

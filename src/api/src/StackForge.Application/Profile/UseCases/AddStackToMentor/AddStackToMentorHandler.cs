@@ -1,5 +1,5 @@
-﻿using StackForge.Application.Profile.Interfaces;
-using StackForge.Application.Profile.UseCases.Errors;
+﻿using StackForge.Application.Profile.Errors;
+using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 

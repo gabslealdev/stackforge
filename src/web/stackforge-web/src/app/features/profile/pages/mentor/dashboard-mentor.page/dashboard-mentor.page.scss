@@ -6,7 +6,7 @@ main {
     & .profile-summary{
         height: 100%;
         width: 25%;
-        border-right: 4px solid var(--header-color);
+        border-right: 5px solid var(--surface);
 
     }
 
@@ -25,20 +25,17 @@ main {
                 gap: var(--space-4);
 
                 & a{
-                    color: var(--color-link);
-                    padding-block: 4px;
-                    padding-inline: 16px;
-                    background-color: var(--color-surface);
-                    border-radius: 4px;
-                    font-weight: 300;
+                    color: var(--link);
+                    font-weight: 400;
                 }
 
                 & a:hover{
-                    color: var(--color-link-hover);
-                    font-weight: 300;
-                    background-color: var(--color-border );
+                    color: var(--text-primary);
                     transition: .5s;
+                    cursor: pointer;
                 }
+
+
             }
         }
     }

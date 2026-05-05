@@ -1,24 +1,20 @@
-:host{
-    background-color: aqua;
-}
-
-button{
-    background-color: var(--color-secondary);
-    color: var(--header-color);
+button {
+    color: var(--text-button);
     font-weight: 300;
     border: 1px solid var(--color-surface);
+    border-radius: var(--radius-sm);
     width: 100%;
-    padding: 4px;
+    padding: var(--space-0);
+    background-color: var(--fill-secondary);
+    animation: gradientMove 6s ease infinite;
+
+    & span {
+        font-weight: 400;
+    }
 }
 
 button:hover{
-    color: var(--color-primary-hover);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-primary);
-    transition: .7s;
-}
+    background: linear-gradient(30deg, var(--fill), var(--fill-secondary));
+    transition: 1s;
 
-button:active{
-    color: var(--color-secondary);
-    transition: .2s;
 }

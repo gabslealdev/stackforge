@@ -1,4 +1,4 @@
-import { Component, input, Input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { LucideSquareX } from "@lucide/angular";
 import { Stack } from '../../models/Stacks/stacks.response';
 

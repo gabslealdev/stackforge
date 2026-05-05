@@ -13,7 +13,9 @@
                 [saved]="isSaved(stack.id)"
                 [disabled]="isSaved(stack.id)"
                 (stackSelected)="selectedStack($event)"
-                (stackDeselected)="deselectedStack($event)"></app-stack-chip>
+                (stackDeselected)="deselectedStack($event)
+                ">
+            </app-stack-chip>
             }
         </section>
         <div class="button-wrapper">
