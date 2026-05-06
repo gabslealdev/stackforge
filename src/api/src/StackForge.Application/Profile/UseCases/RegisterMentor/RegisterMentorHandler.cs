@@ -1,7 +1,8 @@
-﻿using StackForge.Application.Identity.Interfaces.Repository;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
+using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
-using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 using StackForge.Domain.IdentityContext.Enums;
 using StackForge.Domain.ProfileContext.Entities;
@@ -10,7 +11,8 @@ using StackForge.Domain.ProfileContext.ValueObjects;
 
 namespace StackForge.Application.Profile.UseCases.RegisterMentor
 {
-    public sealed class RegisterMentorHandler
+    public sealed class RegisterMentorHandler 
+        : ICommandHandler<RegisterMentorCommand, Result<RegisterMentorResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserRegistrationRepository _userRegistrationRepository;
@@ -47,7 +49,12 @@ namespace StackForge.Application.Profile.UseCases.RegisterMentor
                 return Result<RegisterMentorResponse>.Failure(ProfileApplicationErrors.ProfileAlreadyExist);
 
             var name = Name.Create(command.FirstName, command.LastName);
-            var education = Education.Create(command.CourseName, command.Institution, (EducationStatus)command.EducationStatus, command.ConclusionDate);
+            var education = Education.Create(
+                command.CourseName, 
+                command.Institution, 
+                (EducationStatus)command.EducationStatus,
+                command.ConclusionDate
+                );
 
             Bio? bio = null;
 

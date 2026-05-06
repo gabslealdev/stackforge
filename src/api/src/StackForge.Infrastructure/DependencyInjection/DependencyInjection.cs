@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
 using StackForge.Application.Identity.UseCases.LoginUser;
@@ -13,13 +15,14 @@ using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterLearner;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
-using StackForge.Application.Shared.Abstractions;
+using StackForge.Application.Shared.Results;
 using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
 using StackForge.Infrastructure.Data.Repositories.Identity;
 using StackForge.Infrastructure.Data.Repositories.Profile;
 using StackForge.Infrastructure.Data.Seed;
 using StackForge.Infrastructure.Data.UnitOfWork;
+using StackForge.Infrastructure.Messaging;
 using StackForge.Infrastructure.Security;
 
 namespace StackForge.Infrastructure.DependencyInjection
@@ -55,6 +58,14 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<AddStackToMentorHandler>();
             services.AddScoped<UpdateMentorAvailabilityHandler>();
             services.AddScoped<GetCurrentMentorHandler>();
+            services.AddScoped<IMediator, Mediator>();
+            services.AddScoped<
+                ICommandHandler<RegisterMentorCommand, Result<RegisterMentorResponse>>,
+                RegisterMentorHandler>();
+            services.AddScoped<
+                IQueryHandler<GetCurrentMentorQuery, Result<GetCurrentMentorResponse>>,
+                GetCurrentMentorHandler>();
+            
 
             return services;
         }

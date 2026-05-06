@@ -1,10 +1,12 @@
-﻿using StackForge.Application.Profile.Errors;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Application.Profile.UseCases.GetCurrentMentor
 {
-    public sealed class GetCurrentMentorHandler
+    public sealed class GetCurrentMentorHandler 
+        : IQueryHandler<GetCurrentMentorQuery, Result<GetCurrentMentorResponse>>
     {
         private readonly IMentorProfileRepository _mentorProfileRepository;
 

@@ -1,14 +1,15 @@
-﻿using StackForge.Application.Identity.Errors;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
+using StackForge.Application.Identity.Errors;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
-using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 using StackForge.Domain.IdentityContext.Entities;
 using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.UseCases.RegisterUser
 {
-    public sealed class RegisterUserHandler
+    public sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand, Result<RegisterUserResponse>>
     {
         
         private readonly IUserRepository _userRepository;
@@ -16,7 +17,12 @@ namespace StackForge.Application.Identity.UseCases.RegisterUser
         private readonly IPasswordHasher _passwordHasher;
         private readonly IUnitOfWork    _unitOfWork;
 
-        public RegisterUserHandler(IUserRepository userRepository, IUserRegistrationRepository userRegistrationRepository, IPasswordHasher passwordHasher, IUnitOfWork unitOfWork)
+        public RegisterUserHandler(
+            IUserRepository userRepository,
+            IUserRegistrationRepository userRegistrationRepository,
+            IPasswordHasher passwordHasher, 
+            IUnitOfWork unitOfWork
+            )
         {
             _userRepository = userRepository;
             _userRegistrationRepository = userRegistrationRepository;

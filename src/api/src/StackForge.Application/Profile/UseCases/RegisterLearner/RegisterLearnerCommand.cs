@@ -1,10 +1,10 @@
-﻿namespace StackForge.Application.Profile.UseCases.RegisterLearner
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Profile.UseCases.RegisterMentor;
+using StackForge.Application.Shared.Results;
+
+namespace StackForge.Application.Profile.UseCases.RegisterLearner
 {
-    public sealed record RegisterLearnerCommand
-    {
-        public Guid UserId { get; init; }
-        public string FirstName { get; init; } = string.Empty;
-        public string LastName { get; init; } = string.Empty;
-        public DateOnly BirthDate {  get; init; }
-    }
+    public sealed record RegisterLearnerCommand(Guid UserId, string FirstName, string LastName, DateOnly BirthDate)
+        : ICommand<Result<RegisterLearnerResponse>>;
+
 }

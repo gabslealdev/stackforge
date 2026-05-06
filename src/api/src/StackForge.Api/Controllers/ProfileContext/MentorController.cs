@@ -7,12 +7,12 @@ using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Res
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Requests;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Responses;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.UpdateMentorAvailability.Request;
+using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.Profile.UseCases.AddStackToMentor;
 using StackForge.Application.Profile.UseCases.GetCurrentMentor;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
 using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
-using StackForge.Domain.ProfileContext.Enums;
 
 namespace StackForge.Api.Controllers.ProfileContext
 {
@@ -20,26 +20,20 @@ namespace StackForge.Api.Controllers.ProfileContext
     [Route("api/profile/mentor")]
     public sealed class MentorController : ControllerBase
     {
-        private readonly RegisterMentorHandler _registerMentorHandler;
+        private readonly IMediator _mediator; 
         private readonly IValidator<RegisterMentorCommand> _registerMentorValidator;
-        private readonly AddStackToMentorHandler _addStackToMentorHandler;
         private readonly IValidator<AddStackToMentorCommand> _addStackToMentorValidator;
-        private readonly UpdateMentorAvailabilityHandler _updateMentorAvailability;
-        private readonly GetCurrentMentorHandler _getCurrentMentorHandler;
 
-        public MentorController(RegisterMentorHandler registerMentorHandler, 
+        public MentorController( 
+            IMediator mediator,
             IValidator<RegisterMentorCommand> registerMentorValidator, 
-            IValidator<AddStackToMentorCommand> addStackToMentorValidator,
-            AddStackToMentorHandler addStackToMentorHandler,
-            UpdateMentorAvailabilityHandler updateMentorAvailability,
-            GetCurrentMentorHandler getCurrentMentorHandler)
+            IValidator<AddStackToMentorCommand> addStackToMentorValidator
+            )
         {
-            _registerMentorHandler = registerMentorHandler;
+            _mediator = mediator;
             _registerMentorValidator = registerMentorValidator;
             _addStackToMentorValidator = addStackToMentorValidator;
-            _addStackToMentorHandler = addStackToMentorHandler;
-            _updateMentorAvailability = updateMentorAvailability;
-            _getCurrentMentorHandler = getCurrentMentorHandler;
+
         }
 
         [HttpPost]
@@ -75,7 +69,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<RegisterMentorResponse> result = await _registerMentorHandler.HandleAsync(command);
+            Result<RegisterMentorResponse> result = await _mediator.SendAsync(command);
 
             if (result.IsFailure)
             {
@@ -119,7 +113,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<AddStackToMentorResponse> result = await _addStackToMentorHandler.HandleAsync(command);
+            Result<AddStackToMentorResponse> result = await _mediator.SendAsync(command);
 
             if (result.IsFailure)
             {
@@ -149,7 +143,7 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             var command = new UpdateMentorAvailabilityCommand(userId, request.IsAvailable);
 
-            await _updateMentorAvailability.HandleAsync(command);
+            await _mediator.SendAsync(command);
 
             return NoContent();
 
@@ -169,7 +163,7 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             var query = new GetCurrentMentorQuery(userId);
 
-            Result<GetCurrentMentorResponse> result = await _getCurrentMentorHandler.HandleAsync(query);
+            Result<GetCurrentMentorResponse> result = await _mediator.SendAsync(query);
 
             if(result.IsFailure)
             {
