@@ -1,4 +1,7 @@
-﻿namespace StackForge.Application.Profile.UseCases.RegisterMentor
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Shared.Results;
+
+namespace StackForge.Application.Profile.UseCases.RegisterMentor
 {
     public sealed record RegisterMentorCommand(
         Guid UserId,
@@ -9,5 +12,5 @@
         string Institution,
         int EducationStatus,
         DateOnly ConclusionDate,
-        string? Bio);
+        string? Bio) : ICommand<Result<RegisterMentorResponse>>;
 }

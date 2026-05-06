@@ -1,8 +1,9 @@
-﻿using StackForge.Application.Identity.Interfaces.Repository;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
+using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Profile.UseCases.RegisterMentor;
-using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 using StackForge.Domain.IdentityContext.Enums;
 using StackForge.Domain.ProfileContext.Entities;
@@ -10,14 +11,20 @@ using StackForge.Domain.ProfileContext.ValueObjects;
 
 namespace StackForge.Application.Profile.UseCases.RegisterLearner
 {
-    public sealed class RegisterLearnerHandler
+    public sealed class RegisterLearnerHandler 
+        : ICommandHandler<RegisterLearnerCommand, Result<RegisterLearnerResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserRegistrationRepository _userRegistrationRepository;
         private readonly ILearnerProfileRepository _learnerProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterLearnerHandler(IUserRepository userRepository, IUserRegistrationRepository userRegistrationRepository, ILearnerProfileRepository learnerProfileRepository, IUnitOfWork unitOfWork)
+        public RegisterLearnerHandler(
+            IUserRepository userRepository,
+            IUserRegistrationRepository userRegistrationRepository,
+            ILearnerProfileRepository learnerProfileRepository, 
+            IUnitOfWork unitOfWork
+            )
         {
             _userRepository = userRepository;
             _userRegistrationRepository = userRegistrationRepository;

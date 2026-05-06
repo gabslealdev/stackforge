@@ -1,9 +1,11 @@
-﻿using StackForge.Application.Profile.Interfaces;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Profile.Interfaces;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Application.Profile.UseCases.GetAllStacks
 {
-    public sealed class GetAllStacksHandler
+    public sealed class GetAllStacksHandler 
+        : IQueryHandler<GetAllStacksQuery, Result<IReadOnlyList<GetAllStacksResponse>>>
     {
         private readonly IStackRepository _stackRepository;
 
@@ -16,7 +18,12 @@ namespace StackForge.Application.Profile.UseCases.GetAllStacks
         {
             var stacks = await _stackRepository.GetAllOrderedByNameAsync();
 
-            IReadOnlyList<GetAllStacksResponse> response = stacks.Select(stack => new GetAllStacksResponse(stack.Id, stack.Name, stack.Key.Value)).ToList();
+            IReadOnlyList<GetAllStacksResponse> response = stacks.Select(stack => new
+                GetAllStacksResponse(
+                    stack.Id, 
+                    stack.Name, 
+                    stack.Key.Value))
+                .ToList();
 
             return Result<IReadOnlyList<GetAllStacksResponse>>.Success(response);
         }

@@ -9,8 +9,8 @@ namespace StackForge.Domain.StacksContext.Entities
     public sealed class Stack : Entity
     {
         private const int MaxLength = 20;
-        public string Name { get; private set; }
-        public Key Key { get; private set; }
+        public string Name { get; private set; } = string.Empty;
+        public Key Key { get; private set; } = null!;
 
         private readonly List<MentorProfile> _mentors = [];
         public IReadOnlyCollection<MentorProfile> Mentors => _mentors.AsReadOnly();

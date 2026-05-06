@@ -1,17 +1,23 @@
-﻿using StackForge.Application.Profile.Errors;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
+using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
-using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Application.Profile.UseCases.AddStackToMentor
 {
-    public sealed class AddStackToMentorHandler
+    public sealed class AddStackToMentorHandler 
+        : ICommandHandler<AddStackToMentorCommand, Result<AddStackToMentorResponse>>
     {
         private readonly IMentorProfileRepository _mentorProfileRepository;
         private readonly IStackRepository _stackRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddStackToMentorHandler(IMentorProfileRepository mentorProfileRepository, IStackRepository stackRepository, IUnitOfWork unitOfWork)
+        public AddStackToMentorHandler(
+            IMentorProfileRepository mentorProfileRepository,
+            IStackRepository stackRepository,
+            IUnitOfWork unitOfWork
+            )
         {
             _mentorProfileRepository = mentorProfileRepository;
             _stackRepository = stackRepository;

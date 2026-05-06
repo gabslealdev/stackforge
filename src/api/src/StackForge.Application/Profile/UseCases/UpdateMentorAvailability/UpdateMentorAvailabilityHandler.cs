@@ -1,16 +1,18 @@
-﻿using StackForge.Application.Profile.Errors;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Abstractions.Persistance;
+using StackForge.Application.Profile.Errors;
 using StackForge.Application.Profile.Interfaces;
-using StackForge.Application.Shared.Abstractions;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Application.Profile.UseCases.UpdateMentorAvailability
 {
-    public sealed class UpdateMentorAvailabilityHandler
+    public sealed class UpdateMentorAvailabilityHandler : ICommandHandler<UpdateMentorAvailabilityCommand, Result>
     {
         private readonly IMentorProfileRepository _mentorProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateMentorAvailabilityHandler(IMentorProfileRepository mentorProfileRepository, IUnitOfWork unitOfWork)
+        public UpdateMentorAvailabilityHandler(IMentorProfileRepository mentorProfileRepository,
+            IUnitOfWork unitOfWork)
         {
             _mentorProfileRepository = mentorProfileRepository;
             _unitOfWork = unitOfWork;

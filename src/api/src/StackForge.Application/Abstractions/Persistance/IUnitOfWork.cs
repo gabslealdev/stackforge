@@ -1,4 +1,4 @@
-﻿namespace StackForge.Application.Shared.Abstractions
+﻿namespace StackForge.Application.Abstractions.Persistance
 {
     public interface IUnitOfWork
     {

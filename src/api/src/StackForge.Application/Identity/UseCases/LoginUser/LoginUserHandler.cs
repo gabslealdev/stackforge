@@ -1,4 +1,5 @@
-﻿using StackForge.Application.Identity.Errors;
+﻿using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.Identity.Errors;
 using StackForge.Application.Identity.Interfaces.Repository;
 using StackForge.Application.Identity.Interfaces.Security;
 using StackForge.Application.Profile.Interfaces;
@@ -7,7 +8,7 @@ using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Application.Identity.UseCases.LoginUser
 {
-    public sealed class LoginUserHandler
+    public sealed class LoginUserHandler : ICommandHandler<LoginUserCommand, Result<LoginUserResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMentorProfileRepository _mentorProfileRepository;
@@ -15,7 +16,13 @@ namespace StackForge.Application.Identity.UseCases.LoginUser
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public LoginUserHandler(IUserRepository userRepository, IMentorProfileRepository mentorProfileRepository, ILearnerProfileRepository learnerProfileRepository, IPasswordHasher passwordHasher, IJwtTokenGenerator jwtTokenGenerator)
+        public LoginUserHandler(
+            IUserRepository userRepository, 
+            IMentorProfileRepository mentorProfileRepository, 
+            ILearnerProfileRepository learnerProfileRepository, 
+            IPasswordHasher passwordHasher, 
+            IJwtTokenGenerator jwtTokenGenerator
+            )
         {
             _userRepository = userRepository;
             _mentorProfileRepository = mentorProfileRepository;
