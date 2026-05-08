@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using StackForge.Application.Profile.UseCases.RegisterLearner;
+using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.ProfileContext

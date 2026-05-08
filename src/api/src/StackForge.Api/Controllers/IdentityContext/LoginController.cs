@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.IdentityContext.LoginUser.Request;
 using StackForge.Api.Contracts.IdentityContext.LoginUser.Response;
-using StackForge.Application.Identity.UseCases.LoginUser;
+using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.IdentityContext
