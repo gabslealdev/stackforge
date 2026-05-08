@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Konscious.Security.Cryptography;
-using StackForge.Application.Identity.Interfaces.Security;
+using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Domain.IdentityContext.ValueObjects;
 
 namespace StackForge.Infrastructure.Security

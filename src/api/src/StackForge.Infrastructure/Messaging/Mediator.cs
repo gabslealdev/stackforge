@@ -18,12 +18,15 @@ public sealed class Mediator : IMediator
         
         var handlerType = typeof(ICommandHandler<,>).MakeGenericType(commandType, typeof(TResponse));
         
+        var handler = _serviceProvider.GetRequiredService(handlerType);
+        
         var method = handlerType.GetMethod("HandleAsync");
         
-        if(method is null)
+        if (method is null)
             throw new InvalidOperationException($"Handler {handlerType} not found");
         
-        var task = (Task<TResponse>)method.Invoke(command, [command])!;
+        if (method.Invoke(handler, [command]) is not Task<TResponse> task)
+            throw new InvalidOperationException($"Handler {handler.GetType().Name} not found");
         
         return await task;
     }
@@ -33,13 +36,17 @@ public sealed class Mediator : IMediator
         var queryType = query.GetType();
 
         var handlerType = typeof(IQueryHandler<,>).MakeGenericType(queryType, typeof(TResponse));
+        
+        var handler =  _serviceProvider.GetRequiredService(handlerType);
 
         var method = handlerType.GetMethod("HandleAsync");
         
-        if(method is null)
+        if (method is null)
             throw new InvalidOperationException($"Handler {handlerType} not found");
-        var task = (Task<TResponse>)method.Invoke(handlerType, [query])!;
-
+        
+        if (method.Invoke(handler, [query]) is not Task<TResponse> task)
+            throw new InvalidOperationException($"Handler {handler.GetType().Name} not found");
+        
         return await task;
     }
 }

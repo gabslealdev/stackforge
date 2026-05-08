@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.IdentityContext.RegisterUser.Request;
 using StackForge.Api.Contracts.IdentityContext.RegisterUser.Response;
-using StackForge.Application.Identity.UseCases.RegisterUser;
+using StackForge.Application.IdentityContext.UseCases.RegisterUser;
 using StackForge.Application.Shared.Results;
 using StackForge.Domain.IdentityContext.Enums;
 

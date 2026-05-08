@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
-using StackForge.Application.Profile.UseCases.GetAllStacks;
+using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
 
 namespace StackForge.Api.Controllers.ProfileContext
 {

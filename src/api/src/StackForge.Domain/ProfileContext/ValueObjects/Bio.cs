@@ -23,6 +23,9 @@ namespace StackForge.Domain.ProfileContext.ValueObjects
             return new Bio(normalizedValue);
         }
 
+        public override string ToString()
+            => Value;
+
         private static string Normalize(string value) 
             => value?.Trim() ?? string.Empty;
 

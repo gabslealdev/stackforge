@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StackForge.Application.Identity.Interfaces.Repository;
+using StackForge.Application.IdentityContext.Interfaces.Repository;
 using StackForge.Domain.IdentityContext.Entities;
 using StackForge.Infrastructure.Data.Context;
 

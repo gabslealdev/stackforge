@@ -8,10 +8,10 @@ using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Reque
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.RegisterMentor.Responses;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.UpdateMentorAvailability.Request;
 using StackForge.Application.Abstractions.Messaging;
-using StackForge.Application.Profile.UseCases.AddStackToMentor;
-using StackForge.Application.Profile.UseCases.GetCurrentMentor;
-using StackForge.Application.Profile.UseCases.RegisterMentor;
-using StackForge.Application.Profile.UseCases.UpdateMentorAvailability;
+using StackForge.Application.ProfileContext.UseCases.AddStackToMentor;
+using StackForge.Application.ProfileContext.UseCases.GetCurrentMentor;
+using StackForge.Application.ProfileContext.UseCases.RegisterMentor;
+using StackForge.Application.ProfileContext.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.ProfileContext

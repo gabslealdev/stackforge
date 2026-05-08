@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StackForge.Application.Profile.Interfaces;
+using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Domain.StacksContext.Entities;
 using StackForge.Infrastructure.Data.Context;
 
