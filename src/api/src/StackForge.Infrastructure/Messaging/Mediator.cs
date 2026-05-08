@@ -12,7 +12,7 @@ public sealed class Mediator : IMediator
         _serviceProvider = serviceProvider;
     }
     
-    public async Task<TResponse> SendAsync<TResponse>(ICommand<TResponse> command)
+    public async Task<TResponse> SendAsync<TResponse>(ICommand<TResponse> command, CancellationToken cancellationToken = default)
     {
         var commandType = command.GetType();
         
@@ -31,7 +31,7 @@ public sealed class Mediator : IMediator
         return await task;
     }
 
-    public async Task<TResponse> SendAsync<TResponse>(IQuery<TResponse> query)
+    public async Task<TResponse> SendAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken = default)
     {
         var queryType = query.GetType();
 

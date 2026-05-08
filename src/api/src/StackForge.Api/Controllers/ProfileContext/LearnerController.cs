@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
 using StackForge.Application.Shared.Results;
 
@@ -9,21 +10,21 @@ namespace StackForge.Api.Controllers.ProfileContext
     [Route("api/profile/learner")]
     public sealed class LearnerController : ControllerBase
     {
-        private readonly RegisterLearnerHandler _handler;
+        private readonly IMediator _mediator;
         private readonly IValidator<RegisterLearnerCommand> _validator;
 
-        public LearnerController(RegisterLearnerHandler handler, IValidator<RegisterLearnerCommand> validator)
+        public LearnerController(IMediator mediator, IValidator<RegisterLearnerCommand> validator)
         {
-            _handler = handler;
+            _mediator = mediator;
             _validator = validator;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(RegisterLearnerResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromBody] RegisterLearnerCommand command)
+        public async Task<IActionResult> Register([FromBody] RegisterLearnerCommand command, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(command);
+            var validationResult = await _validator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -36,7 +37,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<RegisterLearnerResponse> result = await _handler.HandleAsync(command);
+            Result<RegisterLearnerResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
             {
