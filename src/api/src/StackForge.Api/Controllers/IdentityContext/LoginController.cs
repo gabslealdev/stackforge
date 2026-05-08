@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.IdentityContext.LoginUser.Request;
 using StackForge.Api.Contracts.IdentityContext.LoginUser.Response;
+using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.Shared.Results;
 
@@ -11,23 +12,23 @@ namespace StackForge.Api.Controllers.IdentityContext
     [Route("api/identity/login")]
     public sealed class LoginController : ControllerBase
     {
-        private readonly LoginUserHandler _handler;
+        private readonly IMediator _mediator;
         private readonly IValidator<LoginUserCommand> _validator;
 
-        public LoginController(LoginUserHandler handler, IValidator<LoginUserCommand> validator)
+        public LoginController(IMediator mediator, IValidator<LoginUserCommand> validator)
         {
-            _handler = handler;
+            _mediator = mediator;
             _validator = validator;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(LoginUserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Login([FromBody] LoginUserRequestDto request)
+        public async Task<IActionResult> Login([FromBody] LoginUserRequestDto request, CancellationToken cancellationToken)
         {
             var command = new LoginUserCommand(request.Email, request.Password);
             
-            var validationResult = await _validator.ValidateAsync(command);
+            var validationResult = await _validator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -39,7 +40,7 @@ namespace StackForge.Api.Controllers.IdentityContext
                 return BadRequest(errors);
             }
 
-            Result<LoginUserResponse> result = await _handler.HandleAsync(command);
+            Result<LoginUserResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
             {

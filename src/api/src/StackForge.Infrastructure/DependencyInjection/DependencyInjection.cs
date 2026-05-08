@@ -96,8 +96,26 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<UpdateMentorAvailabilityHandler>();
             services.AddScoped<GetCurrentMentorHandler>();
             services.AddScoped<
+                ICommandHandler<RegisterUserCommand, Result<RegisterUserResponse>>,
+                RegisterUserHandler>();
+            services.AddScoped<
+                ICommandHandler<LoginUserCommand, Result<LoginUserResponse>>,
+                LoginUserHandler>();
+            services.AddScoped<
+                ICommandHandler<RegisterLearnerCommand, Result<RegisterLearnerResponse>>,
+                RegisterLearnerHandler>();
+            services.AddScoped<
                 ICommandHandler<RegisterMentorCommand, Result<RegisterMentorResponse>>,
                 RegisterMentorHandler>();
+            services.AddScoped<
+                ICommandHandler<AddStackToMentorCommand, Result<AddStackToMentorResponse>>,
+                AddStackToMentorHandler>();
+            services.AddScoped<
+                ICommandHandler<UpdateMentorAvailabilityCommand, Result>,
+                UpdateMentorAvailabilityHandler>();
+            services.AddScoped<
+                IQueryHandler<GetAllStacksQuery, Result<IReadOnlyList<GetAllStacksResponse>>>,
+                GetAllStacksHandler>();
             services.AddScoped<
                 IQueryHandler<GetCurrentMentorQuery, Result<GetCurrentMentorResponse>>,
                 GetCurrentMentorHandler>();

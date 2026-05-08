@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
+using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
 
 namespace StackForge.Api.Controllers.ProfileContext
@@ -10,11 +11,11 @@ namespace StackForge.Api.Controllers.ProfileContext
     [Authorize(Policy = "MentorOnly")]
     public sealed class StackController : ControllerBase
     {
-        private readonly GetAllStacksHandler _handler;
+        private readonly IMediator _mediator;
 
-        public StackController(GetAllStacksHandler handler)
+        public StackController(IMediator mediator)
         {
-            _handler = handler;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -22,11 +23,11 @@ namespace StackForge.Api.Controllers.ProfileContext
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var query = new GetAllStacksQuery();
 
-            var result = await _handler.HandleAsync(query);
+            var result = await _mediator.SendAsync(query, cancellationToken);
 
             if (result.IsFailure)
             {
