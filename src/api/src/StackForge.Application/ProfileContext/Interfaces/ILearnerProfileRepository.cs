@@ -6,5 +6,6 @@ namespace StackForge.Application.ProfileContext.Interfaces
     {
         Task AddAsync(LearnerProfile learnerProfile);
         Task<bool> ExistsByUserIdAsync(Guid userId);
+        Task<LearnerProfile?> GetByUserIdAsync(Guid userId);
     }
 }

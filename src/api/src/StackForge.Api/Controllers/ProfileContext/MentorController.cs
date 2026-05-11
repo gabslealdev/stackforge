@@ -124,7 +124,10 @@ namespace StackForge.Api.Controllers.ProfileContext
                 });
             }
             
-            var response = new AddStackToMentorResponseDto(result.Value.StackId, result.Value.StackKey);
+            var response = new AddStackToMentorResponseDto(
+                result.Value.StackId, 
+                result.Value.StackKey
+                );
 
             return Ok(response);
         }

@@ -62,6 +62,13 @@ builder.Services.AddAuthorizationBuilder()
         policy.RequireClaim("profileType", "Mentor");
     });
 
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("LearnerOnly", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("profileType", "Learner");
+    });
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -102,6 +102,7 @@ internal sealed class FakeLearnerProfileRepository : ILearnerProfileRepository
 {
     public bool ExistsByUserIdResult { get; set; }
     public List<LearnerProfile> AddedLearners { get; } = [];
+    public LearnerProfile? LearnerByUserId { get; set; }
 
     public Task AddAsync(LearnerProfile learnerProfile)
     {
@@ -111,6 +112,10 @@ internal sealed class FakeLearnerProfileRepository : ILearnerProfileRepository
 
     public Task<bool> ExistsByUserIdAsync(Guid userId)
         => Task.FromResult(ExistsByUserIdResult);
+
+    public Task<LearnerProfile?> GetByUserIdAsync(Guid userId)
+        => Task.FromResult(LearnerByUserId is not null && LearnerByUserId.Id == userId ? LearnerByUserId : null);
+    
 }
 
 internal sealed class FakeMentorProfileRepository : IMentorProfileRepository

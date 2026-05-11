@@ -21,5 +21,10 @@ namespace StackForge.Infrastructure.Data.Repositories.Profile
         {
             return await _context.Learners.AnyAsync(x => x.UserId == userId);
         }
+
+        public async Task<LearnerProfile?> GetByUserIdAsync(Guid userId)
+        {
+            return await _context.Learners.FirstOrDefaultAsync(x => x.UserId == userId);
+        }
     }
 }
