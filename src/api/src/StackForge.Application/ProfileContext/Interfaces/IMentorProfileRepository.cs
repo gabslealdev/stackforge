@@ -1,4 +1,5 @@
-﻿using StackForge.Domain.ProfileContext.Entities;
+﻿using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
+using StackForge.Domain.ProfileContext.Entities;
 
 namespace StackForge.Application.ProfileContext.Interfaces
 {
@@ -13,6 +14,8 @@ namespace StackForge.Application.ProfileContext.Interfaces
         Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId);
 
         void Update(MentorProfile mentorProfile);
+        
+        Task<IReadOnlyList<MentorProfile>> SearchMentorByStacksAsync(IReadOnlyList<Guid> stackIds);
 
         
     }

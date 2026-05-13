@@ -8,6 +8,7 @@ using StackForge.Application.IdentityContext.Interfaces.Repository;
 using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.IdentityContext.UseCases.RegisterUser;
+using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Application.ProfileContext.UseCases.AddStackToMentor;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
@@ -17,10 +18,12 @@ using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
 using StackForge.Application.ProfileContext.UseCases.RegisterMentor;
 using StackForge.Application.ProfileContext.UseCases.UpdateMentorAvailability;
 using StackForge.Application.Shared.Results;
+using StackForge.Application.StackContext;
 using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
 using StackForge.Infrastructure.Data.Repositories.Identity;
 using StackForge.Infrastructure.Data.Repositories.Profile;
+using StackForge.Infrastructure.Data.Repositories.StackContext;
 using StackForge.Infrastructure.Data.Seed;
 using StackForge.Infrastructure.Data.UnitOfWork;
 using StackForge.Infrastructure.Messaging;
@@ -125,6 +128,10 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<
                 IQueryHandler<GetCurrentLearnerQuery, Result<GetCurrentLearnerResponse>>,
                 GetCurrentLearnerHandler>();
+            
+            services.AddScoped<
+                IQueryHandler<SearchMentorByStacksQuery, Result<IReadOnlyList<SearchMentorByStacksResponse>>>,
+                SearchMentorByStacksHandler>();
 
 
             return services;

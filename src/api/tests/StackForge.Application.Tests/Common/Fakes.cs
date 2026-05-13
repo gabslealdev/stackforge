@@ -2,6 +2,7 @@ using StackForge.Application.Abstractions.Persistance;
 using StackForge.Application.IdentityContext.Interfaces.Repository;
 using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Application.ProfileContext.Interfaces;
+using StackForge.Application.StackContext;
 using StackForge.Domain.IdentityContext.Entities;
 using StackForge.Domain.IdentityContext.ValueObjects;
 using StackForge.Domain.ProfileContext.Entities;
@@ -143,6 +144,11 @@ internal sealed class FakeMentorProfileRepository : IMentorProfileRepository
 
     public void Update(MentorProfile mentorProfile)
         => UpdatedMentors.Add(mentorProfile);
+
+    public Task<IReadOnlyList<MentorProfile>> SearchMentorByStacksAsync(IReadOnlyList<Guid> stackIds)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 internal sealed class FakeStackRepository : IStackRepository
@@ -155,4 +161,9 @@ internal sealed class FakeStackRepository : IStackRepository
 
     public Task<Stack?> GetByIdAsync(Guid stackId)
         => Task.FromResult(StackById is not null && StackById.Id == stackId ? StackById : null);
+
+    public Task<IReadOnlyList<Stack>> SearchByTermAsync(string term)
+    {
+        throw new NotImplementedException();
+    }
 }

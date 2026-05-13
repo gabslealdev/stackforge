@@ -3,6 +3,7 @@ using StackForge.Application.Abstractions.Persistance;
 using StackForge.Application.ProfileContext.Errors;
 using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Application.Shared.Results;
+using StackForge.Application.StackContext;
 
 namespace StackForge.Application.ProfileContext.UseCases.AddStackToMentor
 {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
 using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
+using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.ProfileContext
 {
@@ -27,12 +28,11 @@ namespace StackForge.Api.Controllers.ProfileContext
         {
             var query = new GetAllStacksQuery();
 
-            var result = await _mediator.SendAsync(query);
+            Result<IReadOnlyList<GetAllStacksResponse>> result = await _mediator.SendAsync(query);
 
             if (result.IsFailure)
-            {
                 return BadRequest(result.Error);
-            }
+            
 
             return Ok(result.Value);
 

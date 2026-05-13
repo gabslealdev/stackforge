@@ -5,11 +5,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserService } from '../../services/login-user.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { LoginUserRequest } from '../../models/request/login-user.request';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-user.page',
-  imports: [FormButtonComponent, LucideSquareUserRound, ReactiveFormsModule],
+  imports: [FormButtonComponent, LucideSquareUserRound, ReactiveFormsModule, RouterLink],
   templateUrl: './login-user.page.html',
   styleUrl: './login-user.page.scss',
 })
@@ -50,8 +50,14 @@ export class LoginUserPage {
       next: (response) => {
         this._authService.saveSession(response)
         this.loginUserForm.reset();
+        console.log(response.profileType)
+        if (response.profileType == 'Mentor'){
+          this._router.navigate(['mentor/dashboard'])
+        } else if (response.profileType == 'Learner'){
+          this._router.navigate(['learner/dashboard'])
+        }
 
-        this._router.navigate(['mentor/dashboard'])
+        
       },
 error: (error) => {
             console.error("Erro ao realizar login", error.status);

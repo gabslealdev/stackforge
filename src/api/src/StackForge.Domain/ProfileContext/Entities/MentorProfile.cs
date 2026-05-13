@@ -9,7 +9,7 @@ namespace StackForge.Domain.ProfileContext.Entities
     public sealed class MentorProfile : Profile
     {
         private readonly List<Stack> _stacks = [];
-        public IReadOnlyCollection<Stack> Stacks => _stacks.AsReadOnly();
+        public IReadOnlyList<Stack> Stacks => _stacks.AsReadOnly();
 
 
         public Education Education { get; private set; } = null!;

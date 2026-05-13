@@ -60,7 +60,7 @@ export class RegisterLearnerPage {
         this._registrationFlowService.clear();
         console.log(response)
 
-        // enviar para rota de login
+        this._router.navigate(['login'])
       },
       error: (error) => {
         console.error('Error registering learner', error)

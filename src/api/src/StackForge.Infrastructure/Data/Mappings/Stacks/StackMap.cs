@@ -28,6 +28,9 @@ namespace StackForge.Infrastructure.Data.Mappings.Stacks
                 .HasColumnName("key")
                 .HasMaxLength(20)
                 .IsRequired();
+            
+            builder.Navigation(s => s.Mentors)
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
 
         }
     }

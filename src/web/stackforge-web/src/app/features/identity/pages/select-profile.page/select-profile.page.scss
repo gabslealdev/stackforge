@@ -74,10 +74,10 @@ main {
             & .profile-button:hover{
                 color: var(--text-stroke);
                 transition: .4s;
-                border: 2px solid var(--color-secondary);
+                border: 2px solid var(--text-stroke);
 
                 & svg{
-                    color: var(--color-secondary);
+                    color: var(--text-stroke);
                     transition: .4s;
                     
                 }

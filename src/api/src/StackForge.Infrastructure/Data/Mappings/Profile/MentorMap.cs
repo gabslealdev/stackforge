@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Domain.ProfileContext.ValueObjects;
+using StackForge.Domain.StacksContext.Entities;
 
 namespace StackForge.Infrastructure.Data.Mappings.Profile
 {
@@ -79,6 +80,22 @@ namespace StackForge.Infrastructure.Data.Mappings.Profile
                 .HasColumnName("availability")
                 .HasConversion<int>()
                 .IsRequired();
+
+            builder
+                .HasMany(m => m.Stacks)
+                .WithMany(s => s.Mentors)
+                .UsingEntity(
+                    "MentorProfileStack",
+                    right => right.HasOne(typeof(Stack)).WithMany().HasForeignKey("stack_id"),
+                    left => left.HasOne(typeof(MentorProfile)).WithMany().HasForeignKey("mentor_id"),
+                    join =>
+                    {
+                        join.ToTable("mentor_profile_stack");
+                        join.HasKey("mentor_id", "stack_id");
+                    });
+            
+            builder.Navigation(m => m.Stacks)
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }
