@@ -8,6 +8,11 @@
     <ProjectReference Include="..\StackForge.Domain\StackForge.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MentorshipContext\Interfaces\" />
+    <Folder Include="StackContext\Interfaces\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

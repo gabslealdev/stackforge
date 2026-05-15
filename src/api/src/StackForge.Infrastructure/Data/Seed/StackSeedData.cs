@@ -36,7 +36,13 @@ namespace StackForge.Infrastructure.Data.Seed
             Stack.Create("Linux", Key.Create("linux")),
             Stack.Create("Docker", Key.Create("docker")),
             Stack.Create("Rust", Key.Create("rust")),
-            Stack.Create("Pandas", Key.Create("pandas"))
+            Stack.Create("Pandas", Key.Create("pandas")),
+            Stack.Create("Python", Key.Create("python")),
+            Stack.Create("C++", Key.Create("cpp")),
+            Stack.Create("Lisp", Key.Create("lisp")),
+            Stack.Create("Delphi", Key.Create("delphi")),
+            Stack.Create("Haskell", Key.Create("haskell")),
+            Stack.Create("Erlang", Key.Create("erlang"))
 
         ];
     }

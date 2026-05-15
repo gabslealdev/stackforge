@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal} from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Header } from "../../../../../layout/header/header";
 import { MentorProfileSummaryComponent } from '../../../components/mentor/mentor-profile-summary.component/mentor-profile-summary.component';
 import { MentorAddStackComponent } from '../../../components/mentor/mentor-add-stack.component/mentor-add-stack.component';
@@ -52,4 +52,13 @@ export class DashboardMentorPage implements OnInit {
       });
   }
 
+  updateMentorAvailability(isAvailable: boolean): void {
+    this._mentorProfileService.updateMentorAvailability(isAvailable).subscribe({
+      next: () => this.loadMentor(),
+      error: () => {
+        this.errorMessage.set('Não foi possível atualizar a disponibilidade.');
+      }
+    });
+  }
 }
+

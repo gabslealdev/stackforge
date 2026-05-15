@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.ProfileContext.MentorProfile.AddStackToMentor.Response;
 using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
+using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.ProfileContext
 {
@@ -30,9 +31,8 @@ namespace StackForge.Api.Controllers.ProfileContext
             var result = await _mediator.SendAsync(query, cancellationToken);
 
             if (result.IsFailure)
-            {
                 return BadRequest(result.Error);
-            }
+            
 
             return Ok(result.Value);
 

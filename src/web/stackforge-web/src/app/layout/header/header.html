@@ -1,3 +1,11 @@
 <header>
     <img src="logo/StackForge.png">
+    <div class="identity">
+        @if (isAuthenticated()){
+            <button type="button" (click)="logout()">Sair</button>
+        }
+        @else {
+            <p><a routerLink="/login">Já tenho conta!</a></p>
+        }
+    </div>
 </header>

@@ -24,20 +24,20 @@ namespace StackForge.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("MentorProfileStack", b =>
                 {
-                    b.Property<Guid>("MentorsId")
+                    b.Property<Guid>("mentor_id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("StacksId")
+                    b.Property<Guid>("stack_id")
                         .HasColumnType("uuid");
 
-                    b.HasKey("MentorsId", "StacksId");
+                    b.HasKey("mentor_id", "stack_id");
 
-                    b.HasIndex("StacksId");
+                    b.HasIndex("stack_id");
 
-                    b.ToTable("MentorProfileStack");
+                    b.ToTable("mentor_profile_stack", (string)null);
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Identity.Entities.User", b =>
+            modelBuilder.Entity("StackForge.Domain.IdentityContext.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -63,7 +63,7 @@ namespace StackForge.Infrastructure.Data.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Identity.Entities.UserRegistration", b =>
+            modelBuilder.Entity("StackForge.Domain.IdentityContext.Entities.UserRegistration", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -83,7 +83,7 @@ namespace StackForge.Infrastructure.Data.Migrations
                     b.ToTable("user_registrations", (string)null);
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Profile.Entities.LearnerProfile", b =>
+            modelBuilder.Entity("StackForge.Domain.ProfileContext.Entities.LearnerProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +109,7 @@ namespace StackForge.Infrastructure.Data.Migrations
                     b.ToTable("learners", (string)null);
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Profile.Entities.MentorProfile", b =>
+            modelBuilder.Entity("StackForge.Domain.ProfileContext.Entities.MentorProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,7 +144,7 @@ namespace StackForge.Infrastructure.Data.Migrations
                     b.ToTable("mentors", (string)null);
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Stacks.Entities.Stack", b =>
+            modelBuilder.Entity("StackForge.Domain.StacksContext.Entities.Stack", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,22 +173,22 @@ namespace StackForge.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("MentorProfileStack", b =>
                 {
-                    b.HasOne("StackForge.Domain.Profile.Entities.MentorProfile", null)
+                    b.HasOne("StackForge.Domain.ProfileContext.Entities.MentorProfile", null)
                         .WithMany()
-                        .HasForeignKey("MentorsId")
+                        .HasForeignKey("mentor_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StackForge.Domain.Stacks.Entities.Stack", null)
+                    b.HasOne("StackForge.Domain.StacksContext.Entities.Stack", null)
                         .WithMany()
-                        .HasForeignKey("StacksId")
+                        .HasForeignKey("stack_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Profile.Entities.LearnerProfile", b =>
+            modelBuilder.Entity("StackForge.Domain.ProfileContext.Entities.LearnerProfile", b =>
                 {
-                    b.OwnsOne("StackForge.Domain.Profile.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("StackForge.Domain.ProfileContext.ValueObjects.Name", "Name", b1 =>
                         {
                             b1.Property<Guid>("LearnerProfileId")
                                 .HasColumnType("uuid");
@@ -217,9 +217,9 @@ namespace StackForge.Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StackForge.Domain.Profile.Entities.MentorProfile", b =>
+            modelBuilder.Entity("StackForge.Domain.ProfileContext.Entities.MentorProfile", b =>
                 {
-                    b.OwnsOne("StackForge.Domain.Profile.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("StackForge.Domain.ProfileContext.ValueObjects.Name", "Name", b1 =>
                         {
                             b1.Property<Guid>("MentorProfileId")
                                 .HasColumnType("uuid");
@@ -244,7 +244,7 @@ namespace StackForge.Infrastructure.Data.Migrations
                                 .HasForeignKey("MentorProfileId");
                         });
 
-                    b.OwnsOne("StackForge.Domain.Profile.ValueObjects.Education", "Education", b1 =>
+                    b.OwnsOne("StackForge.Domain.ProfileContext.ValueObjects.Education", "Education", b1 =>
                         {
                             b1.Property<Guid>("MentorProfileId")
                                 .HasColumnType("uuid");

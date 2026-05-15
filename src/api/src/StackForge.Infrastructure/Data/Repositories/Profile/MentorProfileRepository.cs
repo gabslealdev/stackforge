@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Infrastructure.Data.Context;
@@ -33,7 +34,9 @@ namespace StackForge.Infrastructure.Data.Repositories.Profile
 
         public async Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId)
         {
-            var mentorProfile = await _context.Mentors.Include(x =>  x.Stacks).FirstOrDefaultAsync(x => x.UserId == userId);
+            var mentorProfile = await _context.Mentors
+                .Include(x =>  x.Stacks)
+                .FirstOrDefaultAsync(x => x.UserId == userId);
 
             return mentorProfile;
         }
@@ -41,6 +44,21 @@ namespace StackForge.Infrastructure.Data.Repositories.Profile
         public void Update(MentorProfile mentorProfile)
         {
             _context.Mentors.Update(mentorProfile);
+        }
+
+        public async Task<IReadOnlyList<MentorProfile>> SearchMentorByStacksAsync(
+            IReadOnlyList<Guid> stackIds)
+        {
+            if (stackIds.Count == 0)
+                return [];
+
+            return await _context.Mentors
+                .AsNoTracking()
+                .Include(mentor => mentor.Stacks)
+                .Where(mentor =>
+                    mentor.Stacks.Any(stack => stackIds.Contains(stack.Id)))
+                .OrderBy(mentor => mentor.Name.FirstName)
+                .ToListAsync();
         }
     }
 }

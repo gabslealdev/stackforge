@@ -40,7 +40,10 @@ namespace StackForge.Api.Controllers.IdentityContext
                 return BadRequest(errors);
             }
 
+
+
             Result<LoginUserResponse> result = await _mediator.SendAsync(command, cancellationToken);
+
 
             if (result.IsFailure)
             {

@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
 
-    & .profile-avatar{
+    & .profile-avatar {
         display: flex;
         align-items: center;
         padding: var(--space-2);
 
-        & .avatar-wrapper{
+        & .avatar-wrapper {
             display: flex;
             justify-content: space-around;
             border-radius: var(--radius-lg);
@@ -30,39 +30,78 @@
                 font-family: var(--font-code);
                 font-size: var(--font-size-lg);
                 font-weight: 450;
-                margin-bottom: -.5rem;
             }
         }
 
-        & small {
-            font-weight: 450;
+        & .availability-status {
+            position: relative;
+            display: inline-block;
+
+            .status-current,
+            .status-option {
+                font-weight: 500;
+                border: none;
+                border-radius: var(--radius-xs);
+                cursor: pointer;
+                padding-inline: var(--space-1);
+                padding-block: var(--space-0);
+            }
+
+            .status-current {
+                background: var(--surface);
+            }
+
+            .status-option {
+                display: none;
+                position: absolute;
+                top: 110%;
+                left: 0;
+                background: var(--surface);
+            }
+
+            &:hover .status-option {
+                display: block;
+            }
+        }
+    }
+
+    & .available {
+        color: var(--color-success);
+    }
+
+    & .unavailable {
+        color: var(--color-danger)
+    }
+
+    & .education {
+        margin-top: var(--space-1);
+    }
+
+    & .bio {
+        width: 90%;
+        text-align: center;
+        margin-top: var(--space-1);
+    }
+
+    & .stacks {
+        margin-top: var(--space-3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & h2 {
+            font-family: var(--font-code);
+            font-size: var(--font-size-md);
+            font-weight: 600;
         }
 
-        & .available{
-            color: var(--color-success);
-        }
-
-        & .unavailable{
-            color: var(--color-danger)
-        }
-
-        & .education {
+        & .stacks-tag {
             margin-top: var(--space-1);
-        }
-
-        & .bio {
-            width: 90%;
-            text-align: center;
-            margin-top: var(--space-1);
-        }
-
-        & .stacks {
-            margin-top: var(--space-3);
-            padding-inline: var(--space-4);
+            padding-inline: var(--space-2);
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
         }
-
     }
+
 }

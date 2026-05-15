@@ -61,6 +61,28 @@ main{
                 }
 
         }
+
+        & .register{
+            margin-top: var(--space-3);
+            display: flex;
+            justify-content: space-around;
+
+            & p{
+                font-size: var(--font-size-sm);
+                font-weight: 300;
+            
+                & a{
+                text-decoration: none;
+                color: var(--link);
+                }
+
+                & a:hover{
+                color: var(--text-stroke);
+                text-decoration: underline;
+                }
+            
+            }
+        }
     }
 
 }

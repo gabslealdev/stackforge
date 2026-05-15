@@ -19,4 +19,8 @@ export class MentorProfileService {
   addStackToMentor(stackId: string): Observable<AddStackToMentorResponse> {
     return this._http.post<AddStackToMentorResponse>(`${this._apiUrl}/api/profile/mentor/stacks`, { stackId });
   }
+
+  updateMentorAvailability(isAvailable: boolean): Observable<void>{
+      return this._http.patch<void>(`${this._apiUrl}/api/profile/mentor/availability`, { isAvailable })
+  }
 }

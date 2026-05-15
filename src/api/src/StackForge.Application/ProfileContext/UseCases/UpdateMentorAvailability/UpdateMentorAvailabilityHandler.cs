@@ -20,7 +20,7 @@ namespace StackForge.Application.ProfileContext.UseCases.UpdateMentorAvailabilit
 
         public async Task<Result> HandleAsync(UpdateMentorAvailabilityCommand command)
         {
-            var mentor = await _mentorProfileRepository.GetByUserIdAsync(command.UserId);
+            var mentor = await _mentorProfileRepository.GetWithStacksByUserIdAsync(command.UserId);
 
             if (mentor is null)
                 return Result.Failure(ProfileApplicationErrors.MentorNotFound);

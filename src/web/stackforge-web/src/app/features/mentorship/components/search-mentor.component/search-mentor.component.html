@@ -1,0 +1,64 @@
+<section class="container">
+
+    <div class="search-bar-wrapper">
+        <div class="search-bar-container">
+            <input class="search-bar" [formControl]="searchStackControl" type="text">
+            <button class="search-button" type="button" (click)="searchStacks()">
+                <svg lucideSearch [size]="20" [strokeWidth]="3"></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="search-stack-wrapper">
+        <div class="search-stack-container">
+            @if(isSearchingStack()){
+            <p>Buscando stacks ...</p>
+            } @else if (stackList().length > 0){
+            @for (stack of stackList(); track stack.id){
+            <div class="stacks-chip">
+                <app-stack-chip [stack]="stack" [selected]="isSelected(stack)"
+                    (stackSelected)="onStackSelected($event)">
+                </app-stack-chip>
+            </div>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="search-mentor-wrapper">
+        <div class="search-mentor-container">
+            <div class="title-section">
+                <h2>Lista de stacks selecionadas</h2>
+            </div>
+            <div class="selected-stacks">
+                @for (stack of selectedStacks(); track stack.id){
+                    <app-stack-chip [stack]="stack" [selected]="isSelected(stack)" (stackSelected)="onStackSelected($event)">
+                    </app-stack-chip>
+                }
+            </div>
+            <app-action-button (clicked)="searchMentorByStacks()" label="Pesquisar Mentor">
+            </app-action-button>
+        </div>
+    </div>
+
+    <div class="mentor-list">
+        @if (mentorList().length > 0){
+            <div class="line-header">
+                <div class="name-col">Nome</div>
+                <div class="course-col">Curso</div>
+                <div class="institution-col">Instituição</div>
+                <div class="stacks-col">Stacks</div>
+            </div>
+        }
+        @for (mentor of mentorList(); track mentor.mentorId){
+            <div class="line">
+                <div class="name-col">{{ mentor.fullName }}</div>
+                <div class="course-col">{{mentor.courseName}}</div>
+                <div class="institution-col">{{mentor.institution}}</div>
+                <div class="stacks-col">...</div>
+            </div>
+        }
+    </div>
+
+
+</section>

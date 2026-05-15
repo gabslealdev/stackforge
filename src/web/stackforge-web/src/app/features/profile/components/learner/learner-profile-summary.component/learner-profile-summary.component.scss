@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .profile-avatar {
+        display: flex;
+        align-items: center;
+        padding: var(--space-2);
+
+        & .avatar-wrapper {
+            display: flex;
+            justify-content: space-around;
+            border-radius: var(--radius-lg);
+            background-color: var(--surface);
+        }
+    }
+
+    & .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & div {
+            font-size: var(--font-size-sm);
+        }
+
+        & .fullname {
+            margin-bottom: var(--space-4);
+            & h2 {
+                font-family: var(--font-code);
+                font-size: var(--font-size-lg);
+                font-weight: 450;
+            }
+        }
+
+        & .mentorship{
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+
+            & .title-box{ 
+                display: flex;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            & h2, h3{
+                font-family: var(--font-code);
+                font-weight: 350;
+            }
+
+            & .mentorships-container{
+                background-color: var(--surface);
+                border-radius: var(--radius-md);
+                padding: var(--space-2);
+            }
+        }
+
+    }
+
+}

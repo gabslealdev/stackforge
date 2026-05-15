@@ -1,5 +1,7 @@
 header{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 10vh;
     background-color: var(--surface);
 
@@ -8,5 +10,18 @@ header{
         height: auto;
         object-fit: contain;
         margin-inline: var(--space-1);
+    }
+
+    & .identity{
+        margin-right: var(--space-4);
+
+        & a{
+            text-decoration: none;
+            color: var(--link);
+        }
+
+        & a:hover{
+            color: var(--stroke-primary);
+        }
     }
 }

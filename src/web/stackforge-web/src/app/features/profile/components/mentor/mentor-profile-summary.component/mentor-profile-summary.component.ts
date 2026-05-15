@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { LucideSquareUserRound } from '@lucide/angular';
 import { StackChipComponent } from '../../stack-chip.component/stack-chip.component';
 import { GetCurrentMentorResponse } from '../../../models/Mentor/mentor-profile.response';
@@ -12,6 +12,13 @@ import { GetCurrentMentorResponse } from '../../../models/Mentor/mentor-profile.
 export class MentorProfileSummaryComponent {
   mentor = input.required<GetCurrentMentorResponse>();
 
+  availabilityChanged = output<boolean>();
+
+  changeAvailability(): void {
+    const isAvailable = this.mentor().availability !== 'Available';
+
+    this.availabilityChanged.emit(isAvailable);
+  }
 }
 
 

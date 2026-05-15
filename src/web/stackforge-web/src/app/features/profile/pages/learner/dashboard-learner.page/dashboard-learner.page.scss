@@ -1,0 +1,42 @@
+main {
+    display: flex;
+    height: 90vh;
+    width: 100vw;
+
+    & .profile-summary{
+        height: 100%;
+        width: 25%;
+        border-right: 5px solid var(--surface);
+
+    }
+
+    & .dashboard-container{
+        height: 100%;
+        width: 80%;
+
+        & .header{
+            height: 10%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            & .nav-links{
+                display: flex;
+                gap: var(--space-4);
+
+                & a{
+                    color: var(--link);
+                    font-weight: 400;
+                }
+
+                & a:hover{
+                    color: var(--text-primary);
+                    transition: .5s;
+                    cursor: pointer;
+                }
+
+
+            }
+        }
+    }
+}

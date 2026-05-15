@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using System.Security.Claims;
+using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
@@ -50,5 +52,34 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             return Created(string.Empty, result.Value);
         }
+
+        [Authorize(Policy = "LearnerOnly")]
+        [HttpGet("me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetCurrentLearner()
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var query = new GetCurrentLearnerQuery(userId);
+            
+            Result<GetCurrentLearnerResponse> result = await _mediator.SendAsync(query);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(new
+                {
+                    result.Error.Code,
+                    result.Error.Message
+                });
+            }
+            
+            return Ok(result.Value);
+        }
+        
     }
 }

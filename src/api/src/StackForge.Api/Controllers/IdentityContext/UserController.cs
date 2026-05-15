@@ -47,6 +47,7 @@ namespace StackForge.Api.Controllers.IdentityContext
 
             Result<RegisterUserResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
+
             if (result.IsFailure)
             {
                 return BadRequest(new { 

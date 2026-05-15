@@ -2,7 +2,7 @@
 <main>
     <section class="profile-summary">
         @if (mentor(); as currentMentor){
-            <app-mentor-summary [mentor]="currentMentor"></app-mentor-summary>
+            <app-mentor-summary [mentor]="currentMentor" (availabilityChanged)="updateMentorAvailability($event)">"></app-mentor-summary>
         } @else if (isLoading()){
             <p>Carregando...</p>
         }

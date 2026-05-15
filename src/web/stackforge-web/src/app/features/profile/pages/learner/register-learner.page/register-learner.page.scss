@@ -15,10 +15,10 @@ main {
         margin-top: var(--space-5);
 
         & h2 {
-            font-weight: lighter;
+            font-weight: 250;
 
             & span {
-                color: var(--color-secondary);
+                color: var(--text-stroke);
             }
         }
 
@@ -49,13 +49,15 @@ main {
                 flex-direction: column;
 
                 & label {
-                    font-weight: lighter;
+                    font-weight: 250;
                 }
 
                 & input {
-                    background-color: var(--background-color);
+                    background-color: var(--surface);
+                    padding: 2px;
                     outline: none;
-                    border: 1px solid var(--color-border);
+                    border: none;
+                    border-radius: var(--radius-sm);
                     color: var(--primary-color)
                 }
                 
