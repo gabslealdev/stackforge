@@ -9,6 +9,7 @@ using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.IdentityContext.UseCases.RegisterUser;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
+using StackForge.Application.MentorshipContext.UseCases.SearchStack;
 using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Application.ProfileContext.UseCases.AddStackToMentor;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
@@ -132,6 +133,10 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<
                 IQueryHandler<SearchMentorByStacksQuery, Result<IReadOnlyList<SearchMentorByStacksResponse>>>,
                 SearchMentorByStacksHandler>();
+
+            services.AddScoped<
+                IQueryHandler<SearchStackQuery, Result<IReadOnlyList<SearchStackResponse>>>,
+                    SearchStackHandler>();
 
 
             return services;

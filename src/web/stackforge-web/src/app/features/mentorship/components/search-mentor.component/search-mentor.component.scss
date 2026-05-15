@@ -1,0 +1,142 @@
+.container{
+    padding-inline: var(--space-3);
+
+    & .search-bar-wrapper{
+        display: flex;
+        justify-content: space-around;
+
+        & .search-bar-container{
+            display: flex;
+            width: 60%;
+            margin: var(--space-1);
+
+            & .search-bar{
+                width: 94%;
+                padding: var(--space-0);
+                background-color: var(--surface);
+                border: none;
+                border-radius: var(--radius-xs);
+
+            }
+
+            & .search-bar:focus{
+                outline: none;
+            }
+
+            & button{
+                width: 6%;
+                padding: var(--space-0);
+                background-color: var(--card-background);
+                color: var(--text-secondary);
+                border-radius: var(--radius-xs);
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+        }
+    }
+
+    & .search-stack-wrapper{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: var(--space-3);
+
+        & .search-stack-container{
+            display: flex;
+            width: 60%;
+            gap: var(--space-1);
+            flex-wrap: wrap ;
+        }   
+    }
+
+    & .search-mentor-wrapper{
+        display: flex;
+        justify-content: space-around;
+
+        & .search-mentor-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--space-1);
+            width: 60%;
+
+            & .title-section{
+                & h2{
+                    font-family: var(--font-code);
+                    font-size: var(--font-size-lg);
+                    font-weight: 500;
+                }
+            }
+
+            & .selected-stacks{
+            display: flex;
+            gap: var(--space-1);
+            flex-wrap: wrap ;
+            }
+        }
+    }
+
+    & .mentor-list{
+        margin-top: var(--space-3);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-0);
+        width: 100%;
+
+        & .line-header{
+            display: flex;
+
+            background-color: var(--card-background);
+            color: var(--text-secondary      ); 
+            border-radius: var(--radius-sm);
+            padding: var(--space-0);
+            width: 100%;
+
+            & .name-col{
+                width: 30%;
+            }
+
+            & .course-col{
+                width: 45%;
+            }
+
+            & .institution-col{
+                width: 10%;
+            }
+
+            & .stacks-col{
+                width: 15%;
+            }
+        }
+
+
+        & .line{
+            display: flex;
+
+            background-color: var(--surface);
+            border-radius: var(--radius-sm);
+            padding: var(--space-0);
+            width: 100%;
+
+            & .name-col{
+                width: 30%;
+            }
+
+            & .course-col{
+                width: 45%;
+            }
+
+            & .institution-col{
+                width: 10%;
+            }
+
+            & .stacks-col{
+                display: flex;
+                justify-content: space-around;
+                width: 15%;
+            }
+        
+        }
+    }
+}

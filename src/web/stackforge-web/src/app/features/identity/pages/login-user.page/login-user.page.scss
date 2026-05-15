@@ -63,6 +63,9 @@ main{
         }
 
         & .register{
+            margin-top: var(--space-3);
+            display: flex;
+            justify-content: space-around;
 
             & p{
                 font-size: var(--font-size-sm);

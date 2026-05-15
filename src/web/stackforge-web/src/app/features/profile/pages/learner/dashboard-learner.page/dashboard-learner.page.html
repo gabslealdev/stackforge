@@ -1,14 +1,25 @@
 <app-header></app-header>
 <main>
     <section class="profile-summary">
-        <app-learner-profile></app-learner-profile>
+        @if (learner(); as currentLearner){
+        <app-learner-profile [learner]="currentLearner"></app-learner-profile>
+        }@else if (isLoading()){
+        <p>Carregando...</p>
+        }
+        @else {
+        <p>{{ errorMessage() || 'Dados do learner não carregados'}}</p>
+        }
     </section>
     <section class="dashboard-container">
         <div class="header">
             <nav class="nav-links">
+                <a>Procurar Mentor</a>
+                <a>Mentorias</a>
+                <a>Convites</a>
             </nav>
         </div>
         <section class="currentSection">
+            <app-search-mentor></app-search-mentor>
         </section>
     </section>
 </main>

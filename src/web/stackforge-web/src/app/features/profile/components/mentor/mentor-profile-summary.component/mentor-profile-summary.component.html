@@ -27,14 +27,18 @@
         </div>
 
         <div class="stacks">
-            @if (currentMentor.stacks.length > 0){
-            @for (stack of currentMentor.stacks; track stack.id){
-            <app-stack-chip [stack]="stack"></app-stack-chip>
-            }
-            }
-            @else {
-            <p>Nenhuma stack cadastrada.</p>
-            }
+            <h2>Stacks</h2>
+            <div class="stacks-tag">
+                @if (currentMentor.stacks.length > 0){
+                @for (stack of currentMentor.stacks; track stack.id){
+                <app-stack-chip [stack]="stack"></app-stack-chip>
+                }
+                }
+                @else {
+                <p>Nenhuma stack cadastrada.</p>
+                }
+
+            </div>
         </div>
     </section>
 </div>

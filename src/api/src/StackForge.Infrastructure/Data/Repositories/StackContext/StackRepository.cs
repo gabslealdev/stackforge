@@ -38,8 +38,7 @@ namespace StackForge.Infrastructure.Data.Repositories.StackContext
             return await _context.Stacks
                 .AsNoTracking()
                 .Where(stack =>
-                    stack.Name.ToLower().Contains(normalizeTerm) || 
-                    stack.Key.Value.ToLower().Contains(normalizeTerm))
+                    stack.Name.ToLower().Contains(normalizeTerm))
                 .OrderBy(stack => stack.Name)
                 .Take(10)
                 .ToListAsync();

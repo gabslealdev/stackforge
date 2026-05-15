@@ -28,7 +28,7 @@ export class LoginUserPage {
   });
 
   protected get email() {
-    return this.loginUserForm.get('email'); 
+    return this.loginUserForm.get('email');
   }
 
   protected get password() {
@@ -36,7 +36,7 @@ export class LoginUserPage {
   }
 
   protected onSubmit(): void {
-    if(this.loginUserForm.invalid){
+    if (this.loginUserForm.invalid) {
       this.loginUserForm.markAllAsTouched();
       return;
     }
@@ -51,25 +51,25 @@ export class LoginUserPage {
         this._authService.saveSession(response)
         this.loginUserForm.reset();
         console.log(response.profileType)
-        if (response.profileType == 'Mentor'){
+        if (response.profileType == 'Mentor') {
           this._router.navigate(['mentor/dashboard'])
-        } else if (response.profileType == 'Learner'){
+        } else if (response.profileType == 'Learner') {
           this._router.navigate(['learner/dashboard'])
         }
 
-        
+
       },
-error: (error) => {
-            console.error("Erro ao realizar login", error.status);
+      error: (error) => {
+        console.error("Erro ao realizar login", error.status);
 
-            if (error.status === 400) {
-              this.apiErrorMessage = "Email ou Senha inválidos.";
-            } else {
-             this.apiErrorMessage = "Ocorreu um erro ao tentar realizar login. Por favor, tente novamente mais tarde.";
-            }
+        if (error.status === 400) {
+          this.apiErrorMessage = "Email ou Senha inválidos.";
+        } else {
+          this.apiErrorMessage = "Ocorreu um erro ao tentar realizar login. Por favor, tente novamente mais tarde.";
+        }
 
-            this.cdr.detectChanges();
-          }     
+        this.cdr.detectChanges();
+      }
     })
   }
 }

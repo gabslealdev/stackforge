@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { LucideSquareUserRound } from '@lucide/angular';
+import { GetCurrentLearnerResponse } from '../../../models/Learner/learner-profile.response';
 
 @Component({
   selector: 'app-learner-profile',
@@ -8,5 +9,5 @@ import { LucideSquareUserRound } from '@lucide/angular';
   styleUrl: './learner-profile-summary.component.scss',
 })
 export class LearnerProfileSummaryComponent {
-
+  learner = input.required<GetCurrentLearnerResponse>();
 }

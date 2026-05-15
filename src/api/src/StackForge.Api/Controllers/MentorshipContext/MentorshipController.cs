@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks.Response;
+using StackForge.Api.Contracts.MentorshipContext.SearchStack.Response;
 using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
+using StackForge.Application.MentorshipContext.UseCases.SearchStack;
 using StackForge.Application.Shared.Results;
 
 namespace StackForge.Api.Controllers.MentorshipContext;
@@ -20,7 +22,7 @@ public sealed partial class MentorshipController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost("mentor")]
     [ProducesResponseType(typeof(IReadOnlyList<SearchMentorByStacksResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SearchMentorByStacks([FromBody] SearchMentorByStacksRequestDto request)
@@ -47,4 +49,26 @@ public sealed partial class MentorshipController : ControllerBase
         
         return Ok(response);
     }
+
+    [HttpPost("stack")]
+    [ProducesResponseType(typeof(IReadOnlyList<SearchMentorByStacksResponseDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SearchStack([FromBody] SearchStackQuery request)
+    {
+        var query = new SearchStackQuery(request.SearchTerm);
+        
+        var result = await _mediator.SendAsync(query);
+        
+        if (result.IsFailure)
+            return BadRequest(result.Error);
+
+        var response = result.Value.Select(stack => new SearchStackResponseDto(
+            stack.StackId, 
+            stack.Name, stack.Key
+            )).ToList();
+        
+        return Ok(response);
+    }
+    
+    
 }
