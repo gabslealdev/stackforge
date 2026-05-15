@@ -25,14 +25,14 @@ namespace StackForge.Api.Controllers.IdentityContext
         [HttpPost]
         [ProducesResponseType(typeof(RegisterUserResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequestDto request)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequestDto request, CancellationToken cancellationToken)
         {
             if (!Enum.TryParse<ProfileType>(request.SelectedProfileType, true, out ProfileType profileType))
                 return BadRequest("Invalid profile type");
             
             var command = new RegisterUserCommand(request.Email, request.Password, profileType);
             
-            var validationResult = await _validator.ValidateAsync(command);
+            var validationResult = await _validator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -45,7 +45,8 @@ namespace StackForge.Api.Controllers.IdentityContext
                 return BadRequest(errors);
             }
 
-            Result<RegisterUserResponse> result = await _mediator.SendAsync(command);
+            Result<RegisterUserResponse> result = await _mediator.SendAsync(command, cancellationToken);
+
 
             if (result.IsFailure)
             {

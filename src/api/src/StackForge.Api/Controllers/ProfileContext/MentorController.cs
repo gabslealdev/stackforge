@@ -39,7 +39,7 @@ namespace StackForge.Api.Controllers.ProfileContext
         [HttpPost]
         [ProducesResponseType(typeof(RegisterMentorResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromBody] RegisterMentorRequestDto request)
+        public async Task<IActionResult> Register([FromBody] RegisterMentorRequestDto request, CancellationToken cancellationToken)
         {
             if(!Guid.TryParse(request.UserId, out var userId))
                 return BadRequest();
@@ -56,7 +56,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 request.ConclusionDate,
                 request.Bio
             );
-            var validationResult = await _registerMentorValidator.ValidateAsync(command);
+            var validationResult = await _registerMentorValidator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -69,7 +69,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<RegisterMentorResponse> result = await _mediator.SendAsync(command);
+            Result<RegisterMentorResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
             {
@@ -91,7 +91,7 @@ namespace StackForge.Api.Controllers.ProfileContext
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddStack([FromBody] AddStackToMentorRequestDto request)
+        public async Task<IActionResult> AddStack([FromBody] AddStackToMentorRequestDto request, CancellationToken cancellationToken)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
              
@@ -100,7 +100,7 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             var command = new AddStackToMentorCommand(userId, request.StackId);
 
-            var validationResult = await _addStackToMentorValidator.ValidateAsync(command);
+            var validationResult = await _addStackToMentorValidator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -113,7 +113,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<AddStackToMentorResponse> result = await _mediator.SendAsync(command);
+            Result<AddStackToMentorResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
             {
@@ -137,7 +137,7 @@ namespace StackForge.Api.Controllers.ProfileContext
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAvailability([FromBody] UpdateMentorAvailabilityRequestDto request)
+        public async Task<IActionResult> UpdateAvailability([FromBody] UpdateMentorAvailabilityRequestDto request, CancellationToken cancellationToken)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -146,7 +146,7 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             var command = new UpdateMentorAvailabilityCommand(userId, request.IsAvailable);
 
-            await _mediator.SendAsync(command);
+            await _mediator.SendAsync(command, cancellationToken);
 
             return NoContent();
 
@@ -157,7 +157,7 @@ namespace StackForge.Api.Controllers.ProfileContext
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetCurrentMentor()
+        public async Task<IActionResult> GetCurrentMentor(CancellationToken cancellationToken)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -166,7 +166,7 @@ namespace StackForge.Api.Controllers.ProfileContext
 
             var query = new GetCurrentMentorQuery(userId);
 
-            Result<GetCurrentMentorResponse> result = await _mediator.SendAsync(query);
+            Result<GetCurrentMentorResponse> result = await _mediator.SendAsync(query, cancellationToken);
 
             if(result.IsFailure)
             {

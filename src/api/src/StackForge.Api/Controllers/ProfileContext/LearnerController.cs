@@ -3,7 +3,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Application.Abstractions.Messaging;
-using StackForge.Application.ProfileContext.UseCases.GetCurrentLearner;
 using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
 using StackForge.Application.Shared.Results;
 
@@ -25,9 +24,9 @@ namespace StackForge.Api.Controllers.ProfileContext
         [HttpPost]
         [ProducesResponseType(typeof(RegisterLearnerResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromBody] RegisterLearnerCommand command)
+        public async Task<IActionResult> Register([FromBody] RegisterLearnerCommand command, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(command);
+            var validationResult = await _validator.ValidateAsync(command, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -40,7 +39,7 @@ namespace StackForge.Api.Controllers.ProfileContext
                 return BadRequest(errors);
             }
 
-            Result<RegisterLearnerResponse> result = await _mediator.SendAsync(command);
+            Result<RegisterLearnerResponse> result = await _mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
             {

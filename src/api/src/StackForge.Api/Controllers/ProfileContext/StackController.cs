@@ -24,11 +24,11 @@ namespace StackForge.Api.Controllers.ProfileContext
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var query = new GetAllStacksQuery();
 
-            Result<IReadOnlyList<GetAllStacksResponse>> result = await _mediator.SendAsync(query);
+            var result = await _mediator.SendAsync(query, cancellationToken);
 
             if (result.IsFailure)
                 return BadRequest(result.Error);
