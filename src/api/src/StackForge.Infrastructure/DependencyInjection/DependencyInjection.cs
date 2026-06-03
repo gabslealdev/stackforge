@@ -8,8 +8,10 @@ using StackForge.Application.IdentityContext.Interfaces.Repository;
 using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.IdentityContext.UseCases.RegisterUser;
+using StackForge.Application.MentorshipContext.Interfaces;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.MentorshipContext.UseCases.SearchStack;
+using StackForge.Application.MentorshipContext.UseCases.SendMentorshipRequest;
 using StackForge.Application.ProfileContext.Interfaces;
 using StackForge.Application.ProfileContext.UseCases.AddStackToMentor;
 using StackForge.Application.ProfileContext.UseCases.GetAllStacks;
@@ -23,6 +25,7 @@ using StackForge.Application.StackContext;
 using StackForge.Infrastructure.Authentication;
 using StackForge.Infrastructure.Data.Context;
 using StackForge.Infrastructure.Data.Repositories.Identity;
+using StackForge.Infrastructure.Data.Repositories.Mentorship;
 using StackForge.Infrastructure.Data.Repositories.Profile;
 using StackForge.Infrastructure.Data.Repositories.StackContext;
 using StackForge.Infrastructure.Data.Seed;
@@ -67,6 +70,7 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<ILearnerProfileRepository, LearnerProfileRepository>();
             services.AddScoped<IMentorProfileRepository, MentorProfileRepository>();
             services.AddScoped<IStackRepository, StackRepository>();
+            services.AddScoped<IMentorshipRequestRepository, MentorshipRequestRepository>();
 
             return services;
         }
@@ -86,6 +90,7 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<IValidator<RegisterUserCommand>, RegisterUserCommandValidator>();
             services.AddScoped<IValidator<LoginUserCommand>, LoginUserCommandValidator>();
             services.AddScoped<IValidator<AddStackToMentorCommand>, AddStackToMentorCommandValidator>();
+            services.AddScoped<IValidator<SendMentorshipRequestCommand>, SendMentorshipRequestValidator>();
 
             return services;
         }
@@ -155,6 +160,10 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<
                 IQueryHandler<SearchStackQuery, Result<IReadOnlyList<SearchStackResponse>>>,
                     SearchStackHandler>();
+            
+            services.AddScoped<
+                ICommandHandler<SendMentorshipRequestCommand, Result<SendMentorshipRequestResponse>>,
+                SendMentorshipRequestHandler>();
 
 
             return services;

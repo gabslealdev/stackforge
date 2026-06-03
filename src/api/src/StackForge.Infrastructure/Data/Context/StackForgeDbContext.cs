@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StackForge.Domain.IdentityContext.Entities;
+using StackForge.Domain.MentorshipContext.Entities;
 using StackForge.Domain.ProfileContext.Entities;
 using StackForge.Domain.StacksContext.Entities;
 
@@ -15,6 +16,7 @@ namespace StackForge.Infrastructure.Data.Context
         public DbSet<UserRegistration> UserRegistrations => Set<UserRegistration>();
         public DbSet<LearnerProfile> Learners => Set<LearnerProfile>();
         public DbSet<MentorProfile> Mentors => Set<MentorProfile>();
+        public DbSet<MentorshipRequest>  MentorshipRequests => Set<MentorshipRequest>();
         public DbSet<Stack> Stacks => Set<Stack>();
 
 

@@ -15,6 +15,7 @@ namespace StackForge.Infrastructure.Data.Seed
             Stack.Create("HTML", Key.Create("html")),
             Stack.Create("CSS", Key.Create("css")),
             Stack.Create(".NET", Key.Create("dotnet")),
+            Stack.Create("Java", Key.Create("java")),
             Stack.Create("Spring Boot", Key.Create("springboot")),
             Stack.Create("Django", Key.Create("django")),
             Stack.Create("Flask", Key.Create("flask")),

@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.ProfileContext.UseCases.GetCurrentLearner;
 using StackForge.Application.ProfileContext.UseCases.RegisterLearner;
 using StackForge.Application.Shared.Results;
 

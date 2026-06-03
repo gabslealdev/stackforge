@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MentorshipContext\Interfaces\" />
     <Folder Include="StackContext\Interfaces\" />
   </ItemGroup>
 

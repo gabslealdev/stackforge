@@ -139,6 +139,11 @@ internal sealed class FakeMentorProfileRepository : IMentorProfileRepository
     public Task<MentorProfile?> GetByUserIdAsync(Guid userId)
         => Task.FromResult(MentorByUserId is not null && MentorByUserId.UserId == userId ? MentorByUserId : null);
 
+    public Task<MentorProfile?> GetByMentorIdAsync(Guid mentorId)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId)
         => Task.FromResult(MentorWithStacksByUserId is not null && MentorWithStacksByUserId.UserId == userId ? MentorWithStacksByUserId : null);
 
