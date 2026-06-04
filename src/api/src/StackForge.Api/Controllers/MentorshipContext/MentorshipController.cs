@@ -2,11 +2,13 @@ using System.Security.Claims;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StackForge.Api.Contracts.MentorshipContext.GetReceivedMentorshipRequest;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks.Response;
 using StackForge.Api.Contracts.MentorshipContext.SearchStack.Response;
 using StackForge.Api.Contracts.MentorshipContext.SendMentorshipRequest;
 using StackForge.Application.Abstractions.Messaging;
+using StackForge.Application.MentorshipContext.UseCases.GetReceivedMentorshipRequest;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.MentorshipContext.UseCases.SearchStack;
 using StackForge.Application.MentorshipContext.UseCases.SendMentorshipRequest;
@@ -16,7 +18,7 @@ namespace StackForge.Api.Controllers.MentorshipContext;
 
 [ApiController]
 [Route("/mentorship")]
-[Authorize(Policy = "LearnerOnly")]
+[Authorize]
 public sealed partial class MentorshipController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -28,6 +30,7 @@ public sealed partial class MentorshipController : ControllerBase
         _validator = validator;
     }
 
+    [Authorize(Policy = "LearnerOnly")]
     [HttpPost("search/mentor")]
     [ProducesResponseType(typeof(IReadOnlyList<SearchMentorByStacksResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -55,7 +58,8 @@ public sealed partial class MentorshipController : ControllerBase
         
         return Ok(response);
     }
-
+    
+    [Authorize(Policy = "LearnerOnly")]
     [HttpPost("stack")]
     [ProducesResponseType(typeof(IReadOnlyList<SearchMentorByStacksResponseDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,6 +80,7 @@ public sealed partial class MentorshipController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize(Policy = "LearnerOnly")]
     [HttpPost("request")]
     [ProducesResponseType(typeof(SendMentorshipRequestResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -118,5 +123,36 @@ public sealed partial class MentorshipController : ControllerBase
         
         return Ok(response);
     }
+
+    [Authorize(Policy = "MentorOnly")]
+    [HttpGet("request/received")]
+    [ProducesResponseType(typeof(IReadOnlyList<GetReceivedMentorshipRequestResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetReceivedMentorshipRequest(CancellationToken cancellationToken)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        if (!Guid.TryParse(userIdClaim, out var userId))
+            return Unauthorized();
+
+        var query = new GetReceivedMentorshipRequestQuery(userId);
+
+        Result<IReadOnlyList<GetReceivedMentorshipRequestResponse>> result = await _mediator
+            .SendAsync(query, cancellationToken);
+
+        var response = result.Value.Select(request => new GetReceivedMentorshipRequestResponseDto(
+            request.MentorshipRequestId,
+            request.LearnerId,
+            request.LearnerName,
+            request.StackId,
+            request.StackName,
+            request.Goal,
+            request.Status,
+            request.CreatedAt));
+        
+        return Ok(response);
+    }
+    
     
 }

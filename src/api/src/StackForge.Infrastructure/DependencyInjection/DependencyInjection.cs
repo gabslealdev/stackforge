@@ -9,6 +9,7 @@ using StackForge.Application.IdentityContext.Interfaces.Security;
 using StackForge.Application.IdentityContext.UseCases.LoginUser;
 using StackForge.Application.IdentityContext.UseCases.RegisterUser;
 using StackForge.Application.MentorshipContext.Interfaces;
+using StackForge.Application.MentorshipContext.UseCases.GetReceivedMentorshipRequest;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.MentorshipContext.UseCases.SearchStack;
 using StackForge.Application.MentorshipContext.UseCases.SendMentorshipRequest;
@@ -164,6 +165,11 @@ namespace StackForge.Infrastructure.DependencyInjection
             services.AddScoped<
                 ICommandHandler<SendMentorshipRequestCommand, Result<SendMentorshipRequestResponse>>,
                 SendMentorshipRequestHandler>();
+
+            services.AddScoped<
+                IQueryHandler<GetReceivedMentorshipRequestQuery, 
+                    Result<IReadOnlyList<GetReceivedMentorshipRequestResponse>>>,
+                GetReceivedMentorshipRequestHandler>();
 
 
             return services;
