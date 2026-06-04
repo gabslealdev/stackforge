@@ -1,4 +1,4 @@
-namespace StackForge.Application.MentorshipContext.UseCases;
+namespace StackForge.Application.MentorshipContext.UseCases.GetReceivedMentorshipRequest;
 
 public sealed record ReceivedMentorshipRequestReadModel(
     Guid MentorshipRequestId,

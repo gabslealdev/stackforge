@@ -3,12 +3,15 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StackForge.Api.Contracts.MentorshipContext.GetReceivedMentorshipRequest;
+using StackForge.Api.Contracts.MentorshipContext.GetSentMentorshipRequest;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks;
+using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks.Request;
 using StackForge.Api.Contracts.MentorshipContext.SearchMentorByStacks.Response;
 using StackForge.Api.Contracts.MentorshipContext.SearchStack.Response;
 using StackForge.Api.Contracts.MentorshipContext.SendMentorshipRequest;
 using StackForge.Application.Abstractions.Messaging;
 using StackForge.Application.MentorshipContext.UseCases.GetReceivedMentorshipRequest;
+using StackForge.Application.MentorshipContext.UseCases.GetSentMentorshipRequest;
 using StackForge.Application.MentorshipContext.UseCases.SearchMentorByStacks;
 using StackForge.Application.MentorshipContext.UseCases.SearchStack;
 using StackForge.Application.MentorshipContext.UseCases.SendMentorshipRequest;
@@ -150,6 +153,37 @@ public sealed partial class MentorshipController : ControllerBase
             request.Goal,
             request.Status,
             request.CreatedAt));
+        
+        return Ok(response);
+    }
+
+    [Authorize(Policy = "LearnerOnly")]
+    [HttpGet("request/sent")]
+    [ProducesResponseType(typeof(IReadOnlyList<GetSentMentorshipRequestResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetSentMentorshipRequest(CancellationToken cancellationToken)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        if (!Guid.TryParse(userIdClaim, out var userId))
+            return Unauthorized();
+        
+        var query = new GetSentMentorshipRequestQuery(userId);
+        
+        Result<IReadOnlyList<GetSentMentorshipRequestResponse>> result = await _mediator
+            .SendAsync(query, cancellationToken);
+
+        var response = result.Value.Select(request => new GetSentMentorshipRequestResponseDto(
+            request.MentorshipRequestId,
+            request.MentorId,
+            request.MentorName,
+            request.StackId,
+            request.StackName,
+            request.Goal,
+            request.Status,
+            request.CreatedAt,
+            request.DecidedAt));
         
         return Ok(response);
     }
