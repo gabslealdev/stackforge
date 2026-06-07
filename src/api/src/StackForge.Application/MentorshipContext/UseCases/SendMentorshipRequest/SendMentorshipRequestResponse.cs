@@ -1,0 +1,3 @@
+namespace StackForge.Application.MentorshipContext.UseCases.SendMentorshipRequest;
+
+public sealed record SendMentorshipRequestResponse(Guid MentorshipRequestId);

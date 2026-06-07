@@ -1,0 +1,16 @@
+button{
+    background-color: var(--fill);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: var(--space-0);
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-xs);
+    font-weight: 550;
+}
+
+button:hover {
+    background: linear-gradient(30deg, var(--fill), var(--fill-secondary));
+    transition: 1s;
+}

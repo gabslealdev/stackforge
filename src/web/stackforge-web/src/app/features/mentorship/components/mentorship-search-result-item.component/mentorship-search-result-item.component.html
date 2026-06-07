@@ -1,0 +1,32 @@
+<section class="mentor-result">
+    <section class="line">
+        <div class="name-col">
+            {{mentor().fullName}}
+        </div>
+        <div class="course-col">
+            {{mentor().courseName}}
+        </div>
+        <div class="institution-col">
+            {{mentor().institution}}
+        </div>
+        <div class="request-col">
+            <app-request-button (clicked)="onRequestMentorship()"></app-request-button>
+        </div>
+        <div class="detail-col">
+            <button type="button" class="arrow-button" [class.expanded-button]="expanded()" (click)="toggleExpanded()">
+                <svg class="chevron" lucideChevronsDown [size]="16"></svg>
+            </button>
+        </div>
+    </section>
+    <div class="details" [class.expanded]="expanded()">
+        <div class="details-content">
+            <div class="stack-list">
+                @for(stack of mentor().stacks; track stack.stackId){
+                    <span class="stack-chip">
+                        {{stack.name}}
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</section>

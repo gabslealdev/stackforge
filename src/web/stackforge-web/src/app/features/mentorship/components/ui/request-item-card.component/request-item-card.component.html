@@ -1,0 +1,32 @@
+<article class="request-card-item">
+    <div class="request-info">
+        <div class="request-title">
+            @if (mode() === 'sent') {
+                <strong>{{ $any(request()).mentorName }}</strong>
+            } @else {
+                <strong>{{ $any(request()).learnerName }}</strong>
+            }
+            <span>{{ request().stackName }}</span>
+        </div>
+        <div class="request-goal">
+            <p>{{ request().goal }}</p>
+        </div>
+        <div class="request-dates">
+            <p>
+                Enviada em: <span>{{ request().createdAt }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="request-status">
+        @if (request().status === "Pending") {
+        <div class="status-chip pending">
+            <svg lucideHourglass [size]="11"></svg>
+            <span class="status">Pendente</span>
+        </div>
+        } @else if (request().status === "Accepted") {
+        <span class="status accepted">Aceita</span>
+        } @else if (request().status === "Rejected") {
+        <span class="status rejected">Rejeitada</span>
+        }
+    </div>
+</article>

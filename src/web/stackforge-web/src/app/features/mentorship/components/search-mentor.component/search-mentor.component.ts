@@ -8,10 +8,15 @@ import { Stack } from '../../../profile/models/Stacks/stacks.response';
 import { SearchMentorByStackRequest } from '../../models/SearchMentorByStacks/search-mentor-by-stacks.request';
 import { SearchMentorByStacksResponse } from '../../models/SearchMentorByStacks/search-mentor-by-stacks.response';
 import { ActionButtonComponent } from '../../../../shared/ui/components/action-button.component/action-button.component';
+import { MentorshipSearchResultItemComponent } from '../mentorship-search-result-item.component/mentorship-search-result-item.component';
+import { MentorshipRequestComponent } from '../mentorship-request.component/mentorship-request.component';
+import { SendMentorshipRequestRequest } from '../../models/SendMentorshipRequest/send-mentorship-request.request';
+import { SendMentorshipRequestResponse } from '../../models/SendMentorshipRequest/send-mentorship-request.response';
 
 @Component({
   selector: 'app-search-mentor',
-  imports: [LucideSearch, ReactiveFormsModule, StackChipComponent, ActionButtonComponent],
+  imports: [LucideSearch, ReactiveFormsModule, StackChipComponent, ActionButtonComponent,
+    MentorshipSearchResultItemComponent, MentorshipRequestComponent],
   templateUrl: './search-mentor.component.html',
   styleUrl: './search-mentor.component.scss',
 })
@@ -27,6 +32,8 @@ export class SearchMentorComponent {
   isSearchingMentors = signal(false);
   isSearchingStack = signal(false);
   errorMessage = signal<string | null>(null);
+
+  selectedMentor = signal<SearchMentorByStacksResponse | null>(null); 
 
   isSelected(stack: Stack): boolean {
     return this.selectedStacks().includes(stack);
@@ -104,6 +111,29 @@ export class SearchMentorComponent {
   this.selectedStacks.set([]);
   this.stackList.set([]);
   this.errorMessage.set(null);
-}
+  }
+
+  onRequestMentorship(mentor: SearchMentorByStacksResponse): void{
+    this.selectedMentor.set(mentor);
+  }
+
+    closeMentorshipRequest(): void {
+    this.selectedMentor.set(null);
+  }
+
+  onMentorshipRequestSubmitted(request: SendMentorshipRequestRequest): void {
+    this._mentorshipService.sendMentorshipRequest(request).subscribe({
+      next: (response) => {
+        alert('Pedido de mentoria enviado com sucesso!');
+        console.log('Resposta do pedido de mentoria:', response);
+        
+      },
+      error: () => {
+        alert('Não foi possível enviar o pedido de mentoria. Tente novamente mais tarde.');
+      }
+    });
+  }
+
 
 }
+

@@ -83,6 +83,53 @@ namespace StackForge.Infrastructure.Data.Migrations
                     b.ToTable("user_registrations", (string)null);
                 });
 
+            modelBuilder.Entity("StackForge.Domain.MentorshipContext.Entities.MentorshipRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTimeOffset?>("DecidedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("decided_at");
+
+                    b.Property<string>("Goal")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("goal");
+
+                    b.Property<Guid>("LearnerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("learner_id");
+
+                    b.Property<Guid>("MentorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mentor_id");
+
+                    b.Property<Guid>("StackId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("stack_id");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id")
+                        .HasName("PK_mentorship_requests");
+
+                    b.HasIndex("LearnerId");
+
+                    b.HasIndex("MentorId");
+
+                    b.HasIndex("StackId");
+
+                    b.ToTable("mentorship_requests", (string)null);
+                });
+
             modelBuilder.Entity("StackForge.Domain.ProfileContext.Entities.LearnerProfile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -183,6 +230,27 @@ namespace StackForge.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("stack_id")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StackForge.Domain.MentorshipContext.Entities.MentorshipRequest", b =>
+                {
+                    b.HasOne("StackForge.Domain.ProfileContext.Entities.LearnerProfile", null)
+                        .WithMany()
+                        .HasForeignKey("LearnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StackForge.Domain.ProfileContext.Entities.MentorProfile", null)
+                        .WithMany()
+                        .HasForeignKey("MentorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StackForge.Domain.StacksContext.Entities.Stack", null)
+                        .WithMany()
+                        .HasForeignKey("StackId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

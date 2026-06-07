@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { LucideSquareX } from "@lucide/angular";
 import { Stack } from '../../models/Stacks/stacks.response';
 
@@ -13,6 +13,7 @@ export class StackChipComponent {
   selected = input(false);
   saved = input(false);
   disabled = input(false);
+  foldable = input(true);
 
   stackSelected = output<Stack>();
   stackDeselected = output<Stack>();

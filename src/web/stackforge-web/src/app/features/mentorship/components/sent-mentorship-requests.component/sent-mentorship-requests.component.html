@@ -1,0 +1,27 @@
+
+<main>
+  <section class="header-component">
+    <h1>Solicitações de Mentoria Enviadas</h1>
+    <small
+      >Acompanhe o status das suas solicitações de mentoria enviadas.</small
+    >
+  </section>
+  <section class="requests-section">
+    @if (isLoading()) {
+      <p>Carregando solicitações...</p>
+    } @else if (errorMessage()) {
+      <p>{{ errorMessage() }}</p>
+    } @else if (requests().length === 0) {
+      <p>Você ainda não enviou solicitações de mentoria.</p>
+    } @else {
+      <div class="request-list">
+        @for (request of requests(); track request.mentorshipRequestId) {
+          <app-request-item-card
+            [request]="request"
+            mode="sent">
+          </app-request-item-card>
+        }
+      </div>
+    }
+  </section>
+</main>

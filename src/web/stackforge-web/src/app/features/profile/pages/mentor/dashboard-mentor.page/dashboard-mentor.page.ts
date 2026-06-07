@@ -5,11 +5,13 @@ import { MentorAddStackComponent } from '../../../components/mentor/mentor-add-s
 import { MentorProfileService } from '../../../services/mentor-profile.service';
 import { GetCurrentMentorResponse } from '../../../models/Mentor/mentor-profile.response';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs';
+import { ReceivedMentorshipRequestsComponent } from '../../../../mentorship/components/received-mentorship-requests.component/received-mentorship-requests.component';
+type MentorDashboardSection = 'mentorships' | 'requests' | 'stacks';
+
 
 @Component({
   selector: 'app-dashboard-mentor.page',
-  imports: [Header, MentorProfileSummaryComponent, MentorAddStackComponent, CommonModule],
+  imports: [Header, MentorProfileSummaryComponent, MentorAddStackComponent, CommonModule, ReceivedMentorshipRequestsComponent],
   templateUrl: './dashboard-mentor.page.html',
   styleUrl: './dashboard-mentor.page.scss',
 })
@@ -20,6 +22,11 @@ export class DashboardMentorPage implements OnInit {
   mentor = signal<GetCurrentMentorResponse | null>(null);
   isLoading = signal(false)
   errorMessage = signal('');
+  currentSection = signal<MentorDashboardSection>('stacks');
+
+  selectSection(section: MentorDashboardSection) {
+    this.currentSection.set(section);
+  }
 
 
 

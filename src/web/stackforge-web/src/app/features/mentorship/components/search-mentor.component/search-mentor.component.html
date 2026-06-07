@@ -40,25 +40,28 @@
             </app-action-button>
         </div>
     </div>
-
     <div class="mentor-list">
         @if (mentorList().length > 0){
             <div class="line-header">
                 <div class="name-col">Nome</div>
                 <div class="course-col">Curso</div>
                 <div class="institution-col">Instituição</div>
-                <div class="stacks-col">Stacks</div>
+                <div class="request-col">Pedido Mentoria</div>
+                <div class="detail-col">Stacks</div>
             </div>
         }
         @for (mentor of mentorList(); track mentor.mentorId){
-            <div class="line">
-                <div class="name-col">{{ mentor.fullName }}</div>
-                <div class="course-col">{{mentor.courseName}}</div>
-                <div class="institution-col">{{mentor.institution}}</div>
-                <div class="stacks-col">...</div>
-            </div>
+            <app-mentorship-search-result-item [mentor]="mentor" (requestMentorship)="onRequestMentorship($event)"></app-mentorship-search-result-item>
         }
     </div>
+
+       @if (selectedMentor(); as mentor){
+        <app-mentorship-request
+            [mentor]="mentor"
+            (closed)="closeMentorshipRequest()"
+            (sendMentorshipRequestSubmitted)="onMentorshipRequestSubmitted($event)"
+            ></app-mentorship-request>
+    }
 
 
 </section>

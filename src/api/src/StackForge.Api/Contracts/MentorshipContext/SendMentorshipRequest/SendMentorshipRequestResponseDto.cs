@@ -1,0 +1,3 @@
+namespace StackForge.Api.Contracts.MentorshipContext.SendMentorshipRequest;
+
+public sealed record SendMentorshipRequestResponseDto(Guid MentorshipRequestId);

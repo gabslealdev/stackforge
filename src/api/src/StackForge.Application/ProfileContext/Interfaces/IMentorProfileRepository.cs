@@ -10,6 +10,8 @@ namespace StackForge.Application.ProfileContext.Interfaces
         Task<bool> ExistsByUserIdAsync(Guid userId);
 
         Task<MentorProfile?> GetByUserIdAsync(Guid userId);
+        
+        Task<MentorProfile?> GetByMentorIdAsync(Guid mentorId);
 
         Task<MentorProfile?> GetWithStacksByUserIdAsync(Guid userId);
 

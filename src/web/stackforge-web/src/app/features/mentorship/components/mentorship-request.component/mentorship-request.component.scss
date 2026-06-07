@@ -1,0 +1,84 @@
+  .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
+
+      & .modal-panel {
+          width: min(620px, calc(100vw - 32px));
+          max-height: calc(100vh - 48px);
+          overflow: auto;
+
+          background: var(--background);
+          border-radius: var(--radius-sm);
+          padding: var(--space-3);
+
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+      }
+
+  }
+
+  .modal-panel {
+      animation: modalIn 140ms ease-out;
+  }
+
+  @keyframes modalIn {
+      from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.98);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+      }
+  }
+
+  .modal-content {
+      & .select-stack {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--space-0);
+
+          & .stacks {
+              display: flex;
+              flex-wrap: wrap;
+              gap: var(--space-0);
+          }
+      }
+
+      .goal-input {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-1);
+          margin-top: var(--space-3);
+
+          & textarea {
+              background-color: var(--surface);
+              padding: 2px;
+              outline: none;
+              border: none;
+              border-radius: var(--radius-sm);
+              color: var(--primary-color)
+          }
+      }
+  }
+
+  .send-request-button {
+    border-radius: var(--radius-sm);
+    background-color: var(--fill);
+    padding: var(--space-0);
+  }
+
+  .send-request-button:hover {
+    background: linear-gradient(30deg, var(--fill), var(--fill-secondary));
+    transition: 1s;
+  }

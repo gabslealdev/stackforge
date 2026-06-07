@@ -13,13 +13,23 @@
     <section class="dashboard-container">
         <div class="header">
             <nav class="nav-links">
-                <a>Procurar Mentor</a>
-                <a>Mentorias</a>
-                <a>Convites</a>
+                <a [class.active]="currentSection() === 'search'" (click)="selectSection('search')">Pesquisar Mentores</a>
+                <a [class.active]="currentSection() === 'requests'" (click)="selectSection('requests')">Convites enviados</a>
+                <a [class.active]="currentSection() === 'mentorships'" (click)="selectSection('mentorships')">Mentorias</a>
             </nav>
         </div>
         <section class="currentSection">
-            <app-search-mentor></app-search-mentor>
+            @switch (currentSection()) {
+                @case ('search') {
+                    <app-search-mentor></app-search-mentor>
+                }
+                @case ('requests') {
+                    <app-sent-mentorship-requests></app-sent-mentorship-requests>
+                }
+                @case ('mentorships') {
+                    <p>Mentorias</p>
+                }
+            }
         </section>
     </section>
 </main>

@@ -2,26 +2,33 @@
     --text-primary: #000;
     --text-secondary: #E5E5E5;
     --text-stroke: #FCA311;
+    --text-stroke-secondary: #8b9095;
     --text-button: #FFF;
     --text-blocked: #ADB5BD;
     --stroke-primary: #0A0908;
     --surface: #E9ECEF;
     --fill: #FCA311;
+    --fill-button: #ced4da;
     --fill-secondary: #FB5607;
     --link: #495057;
+    --color-card: #343a40;
+    --color-card-secondary: #6c757d;
     --color-link-hover: #DEE2E6;
     --color-secondary-strong: #f48c06;
     --card-background: #0A0908;
     --background: #F8F9FA;
-    --header: rgba(173, 181, 189, 0.082);
+    --header: rgba(130, 135, 141, 0.082);
+    --border-transparent: rgba(162, 167, 171, 0.532);
+    --fill-transparent: rgba(208, 200, 200, 0.113);
     --color-border: #3C3C3C;
     --color-danger: #EF4444;
+    --color-pending: #ffca3a;
     --color-success: #22C55E;
 
     --font-primary: "Inter", sans-serif;
     --font-code: "Fira Code", monospace;
 
-    --font-size-xs: 0.5rem;
+    --font-size-xs: 0.75rem;
     --font-size-sm: 0.9rem;
     --font-size-md: 1rem;
     --font-size-lg: 1.25rem;
