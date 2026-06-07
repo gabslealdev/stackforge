@@ -49,6 +49,8 @@
         }   
     }
 
+
+
     & .search-mentor-wrapper{
         display: flex;
         justify-content: space-around;
@@ -86,7 +88,6 @@
 
         & .line-header{
             display: flex;
-
             background-color: var(--card-background);
             color: var(--text-secondary      ); 
             border-radius: var(--radius-sm);
@@ -94,49 +95,30 @@
             width: 100%;
 
             & .name-col{
-                width: 30%;
+                width: 25%;
             }
 
             & .course-col{
-                width: 45%;
+                width: 30%;
             }
 
             & .institution-col{
                 width: 10%;
             }
 
-            & .stacks-col{
-                width: 15%;
-            }
-        }
-
-
-        & .line{
-            display: flex;
-
-            background-color: var(--surface);
-            border-radius: var(--radius-sm);
-            padding: var(--space-0);
-            width: 100%;
-
-            & .name-col{
-                width: 30%;
-            }
-
-            & .course-col{
-                width: 45%;
-            }
-
-            & .institution-col{
-                width: 10%;
-            }
-
-            & .stacks-col{
+            & .request-col{
                 display: flex;
                 justify-content: space-around;
-                width: 15%;
+                width: 20%;
+
             }
-        
+
+            & .detail-col{
+                display: flex;
+                justify-content: space-around;
+                width: 10%;
+            }
         }
+
     }
 }

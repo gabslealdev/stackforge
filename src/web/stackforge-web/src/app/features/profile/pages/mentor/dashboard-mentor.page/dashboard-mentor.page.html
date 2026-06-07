@@ -13,13 +13,23 @@
     <section class="dashboard-container">
         <div class="header">
             <nav class="nav-links">
-                <a>Add Stack</a>
-                <a>Mentorias</a>
-                <a>Convites</a>
+                <a [class.active]="currentSection() === 'mentorships'" (click)="selectSection('mentorships')">Mentorias</a>
+                <a [class.active]="currentSection() === 'requests'" (click)="selectSection('requests')">Convites recebidos</a>
+                <a [class.active]="currentSection() === 'stacks'" (click)="selectSection('stacks')">Stacks</a>
             </nav>
         </div>
         <section class="currentSection">
-            <app-mentor-add-stack (stackAdded)="loadMentor()"></app-mentor-add-stack>
+            @switch (currentSection()) {
+                @case ('mentorships') {
+                    <p>Mentorias</p>
+                }
+                @case ('requests') {
+                    <app-received-mentorship-requests></app-received-mentorship-requests>
+                }
+                @case ('stacks') {
+                    <app-mentor-add-stack (stackAdded)="loadMentor()"></app-mentor-add-stack>
+                }
+            }
         </section>
     </section>
 </main>

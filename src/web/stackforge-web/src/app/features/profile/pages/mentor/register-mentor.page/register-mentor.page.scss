@@ -80,7 +80,7 @@ main {
 
                 & select option {
                     font-weight: lighter;
-                    background-color: #1E1E1E;
+                    background-color: var(--background);
                 }
 
                 & textarea {

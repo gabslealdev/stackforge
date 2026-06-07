@@ -1,0 +1,14 @@
+<main>
+    <section class="header-component">
+        <h1>Solicitações Recebidas</h1>
+        <small>Gerencie as solicitações de mentoria que você recebeu</small>
+    </section>
+    <section class="request-list">
+        @for (request of requests(); track request.mentorshipRequestId){
+            <app-request-item-card
+                [request]="request"
+                mode="received">
+            </app-request-item-card>
+        }
+    </section>
+</main>

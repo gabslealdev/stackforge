@@ -1,0 +1,30 @@
+  <div class="modal-backdrop" (click)="close()">
+    <section class="modal-panel" (click)="$event.stopPropagation()">
+        <section class="modal-content">
+            <div class="select-stack">
+                <p>Selecione a principal stack</p>
+                <div class="stacks">
+                    @for (stack of mentorStacks(); track stack.id)
+                    {
+                        <app-stack-chip 
+                        [stack]="stack"
+                        [foldable]="false"
+                        [selected]="selectedStackId() === stack.id" 
+                        (stackSelected)="selectStack($event)">
+                        </app-stack-chip>
+                    }
+                </div>
+            </div>
+            <div class="goal-input">
+                <label for="goal">O que você espera dessa mentoria?</label>
+                <textarea
+                    id="goal"
+                    [value]="goal()"
+                    (input)="goal.set($any($event.target).value)"
+                    placeholder="Descreva seu objetivo de aprendizado...">
+                </textarea>
+                <button type="button" class="send-request-button" (click)="submit()">Enviar Solicitação</button>
+            </div>
+        </section>
+    </section>
+  </div>

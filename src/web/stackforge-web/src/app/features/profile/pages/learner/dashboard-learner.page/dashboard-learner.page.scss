@@ -35,6 +35,14 @@ main {
                     cursor: pointer;
                 }
 
+                & .active{
+                    color: var(--text-stroke);
+                }
+
+                & .active:hover{
+                    color: var(--text-stroke);
+                }
+
 
             }
         }

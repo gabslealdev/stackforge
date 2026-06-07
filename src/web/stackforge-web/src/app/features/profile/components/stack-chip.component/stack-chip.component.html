@@ -6,7 +6,7 @@
     (click)="onClick()"
 >
     {{ stack().name }} 
-    @if (selected()){
+    @if (selected() && foldable()){
         <button (click)="onRemoveClick($event)">
             <svg lucideSquareX [size]="18" [strokeWidth]="3"></svg> 
         </button>

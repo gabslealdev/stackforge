@@ -1,0 +1,105 @@
+.mentor-result {
+    background-color: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: var(--space-0);
+
+    & .line {
+        display: flex;
+
+        background-color: var(--surface);
+        border-radius: var(--radius-sm);
+        padding: var(--space-0);
+        width: 100%;
+
+        & div {
+            font-size: var(--font-size-sm);
+        }
+
+        & .name-col {
+            width: 25%;
+        }
+
+        & .course-col {
+            width: 30%;
+        }
+
+        & .institution-col {
+            width: 10%;
+        }
+
+        & .request-col {
+            display: flex;
+            justify-content: space-around;
+            width: 20%;
+        }
+
+        & .detail-col {
+            display: flex;
+            justify-content: space-around;
+            width: 10%;
+
+            & .arrow-button {
+                color: var(--link);
+                border-radius: var(--radius-xs);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding-block: var(--space-0);
+                background-color: var(--fill-button);
+                transition: color 160ms ease;
+
+                & .chevron{
+                    transition: transform 160ms ease;
+                }
+            }
+
+            & .expanded-button .chevron{
+                transform: rotate(180deg);
+            }
+
+            & .arrow-button:hover {
+                color: var(--text-primary);
+                font-weight: 600;
+                transition: .3s;
+
+            }
+
+        }
+    }
+
+    & .details {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition:
+            grid-template-rows 180ms ease,
+            opacity 160ms ease;
+
+        & .details-content {
+            overflow: hidden;
+
+            & .stack-list{
+                display: flex;
+                align-items: center;
+                gap: var(--space-0);
+
+                & .stack-chip{
+                    display: flex;
+                    align-items: center;
+                    color: var(--text-secondary);
+                    border-radius: var(--radius-xs);
+                    background-color: var(--card-background);
+                    padding-block: .2rem;
+                    padding-inline: .35rem;
+                    font-size: var(--font-size-sm);
+                }
+            }
+        }
+    }
+
+    & .expanded {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+
+}
